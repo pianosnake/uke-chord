@@ -1,0 +1,30 @@
+{
+  "name": "polymer-chords",
+  "authors": [
+    "Florin Alexandrescu <pianosnake@gmail.com>"
+  ],
+  "description": "Polymer HTML element for ukulele chord diagrams",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "ukulele",
+    "chord",
+    "diagram",
+    "music",
+    "polymer",
+    "web-components",
+    "notation"
+  ],
+  "license": "MIT",
+  "homepage": "http://pianosnake.github.io/polymer-chords",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  }
+}

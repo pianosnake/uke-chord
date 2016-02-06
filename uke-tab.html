@@ -1,0 +1,68 @@
+<link rel="import" href="../polymer/polymer.html">
+<dom-module id="uke-tab">
+<template>
+  <style>
+    :host {
+      display: inline-block;
+    }
+    .hidden{
+      visibility: hidden;
+    }
+  </style>
+  <svg width="72" height="110" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="svg_1" transform="translate(5,20)">
+      <rect id="nut" height="4" width="62" y="0" x="0" fill="black"/>
+      <g id="strings">
+        <rect id="gString" height="80" width="2" y="2" x="0" fill="black"/>
+        <rect id="cString" height="80" width="2" y="2" x="20" fill="black"/>
+        <rect id="eString" height="80" width="2" y="2" x="40" fill="black"/>
+        <rect id="aString" height="80" width="2" y="2" x="60" fill="black"/>
+      </g>
+      <g id="frets" transform="translate(0,2)">
+        <rect height="2" width="62" y="0" x="0" fill="black"/>
+        <rect height="2" width="62" y="20" x="0" fill="black"/>
+        <rect height="2" width="62" y="40" x="0" fill="black"/>
+        <rect height="2" width="62" y="60" x="0" fill="black"/>
+        <rect height="2" width="62" y="80" x="0" fill="black"/>
+      </g>
+      <g id="fingers" transform="translate(1,13)">
+        <circle id="closedString0" cx="0" cy="0" r="6"/>
+        <circle id="closedString1" cx="20" cy="20" r="6"/>
+        <circle id="closedString2" cx="40" cy="40" r="6"/>
+        <circle id="closedString3" cx="60" cy="60" r="6"/>
+      </g>
+      <g id="openStrings" transform="translate(1,-27)">
+        <circle id="openString0" cx="0" cy="20" r="4" fill="none" stroke="black" stroke-width="1"/>
+        <circle id="openString1" cx="20" cy="20" r="4" fill="none" stroke="black" stroke-width="1"/>
+        <circle id="openString2" cx="40" cy="20" r="4" fill="none" stroke="black" stroke-width="1"/>
+        <circle id="openString3" cx="60" cy="20" r="4" fill="none" stroke="black" stroke-width="1"/>
+      </g>
+    </g>
+  </svg>
+</template>
+<script>
+  (function () {
+
+
+    Polymer({
+      is: "uke-tab",
+      properties: {
+        value: String
+      },
+      attached: function() {
+        var frets = this.value.split("");
+        frets.forEach(function(fret, idx){
+          this.toggleClass("hidden", fret !== "0", this.$["openString"+idx]);
+          this.toggleClass("hidden", fret === "0", this.$["closedString"+idx]);
+          this.$["closedString"+idx].setAttribute("cy", (fret-1) * 20);
+
+        }.bind(this))
+
+      },
+
+
+    });
+
+  })();
+</script>
+</dom-module>
