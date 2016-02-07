@@ -2,7 +2,7 @@
 
 A [Polymer](https://www.polymer-project.org) element for a ukulele chord diagram. See usage examples and a live demo here [http://pianosnake.github.io/uke-chord/](http://pianosnake.github.io/uke-chord/)
 
-![alt tag](https://raw.githubusercontent.com/pianosnake/polymer-musical-note/master/demo/demo.png)
+![alt tag](https://raw.githubusercontent.com/pianosnake/uke-chord/master/sample-chord.png)
 
 ## Install
 
