@@ -60,6 +60,12 @@
           <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1"/>
         </g>
+        <g id="subText" transform="translate(-3,98)">
+          <text id="subText0" x="0"></text>
+          <text id="subText1" x="20"></text>
+          <text id="subText2" x="40"></text>
+          <text id="subText3" x="60"></text>
+        </g>
 
       </g>
     </svg>
@@ -71,12 +77,17 @@
         properties: {
           frets: String,
           fingers: String,
+          sub: String,
           nut: Boolean
         },
         attached: function(){
           this.parseFrets();
           this.parseFingers();
+          this.showNut();
+          this.parseSubText();
+        },
 
+        showNut: function(){
           if(!this.nut){
             this.toggleClass("hidden", !this.nut, this.$.nut);
           }
@@ -84,27 +95,35 @@
 
         parseFrets: function(){
           var frets;
-          if(this.frets){
-            frets = this.frets.split("");
-            if(frets.length !== 4) return;
-            frets.forEach(function(fret, idx){
-              this.toggleClass("hidden", fret !== "0", this.$["openString" + idx]);
-              this.toggleClass("hidden", fret === "0", this.$["closedString" + idx]);
-              this.$["closedString" + idx].setAttribute("transform", "translate(0," + (fret - 1) * 20 + ")");
+          if(!this.frets) return;
+          frets = this.frets.split("");
+          if(frets.length !== 4) return;
+          frets.forEach(function(fret, idx){
+            this.toggleClass("hidden", fret !== "0", this.$["openString" + idx]);
+            this.toggleClass("hidden", fret === "0", this.$["closedString" + idx]);
+            this.$["closedString" + idx].setAttribute("transform", "translate(0," + (fret - 1) * 20 + ")");
 
-            }.bind(this));
-          }
+          }.bind(this));
         },
 
         parseFingers: function(){
           var fingers;
-          if(this.fingers){
-            fingers = this.fingers.split("");
-            if(fingers.length !== 4) return;
-            fingers.forEach(function(finger, idx){
-              this.$["finger" + idx].innerHTML = finger !== "0" ? finger : "";
-            }.bind(this));
-          }
+          if(!this.fingers) return;
+          fingers = this.fingers.split("");
+          if(fingers.length !== 4) return;
+          fingers.forEach(function(finger, idx){
+            this.$["finger" + idx].innerHTML = finger !== "0" ? finger : "";
+          }.bind(this));
+        },
+
+        parseSubText: function(){
+          var subText;
+          if(!this.sub) return;
+          subText = this.sub.split("");
+          if(subText.length !== 4) return;
+          subText.forEach(function(text, idx){
+            this.$["subText" + idx].innerHTML = text !== "0" ? text : "";
+          }.bind(this));
         }
       });
     })();
