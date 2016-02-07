@@ -1,5 +1,5 @@
 {
-  "name": "uke-chords",
+  "name": "uke-chord",
   "authors": [
     "Florin Alexandrescu <pianosnake@gmail.com>"
   ],
@@ -17,7 +17,7 @@
     "notation"
   ],
   "license": "MIT",
-  "homepage": "http://pianosnake.github.io/uke-chords",
+  "homepage": "http://pianosnake.github.io/uke-chord",
   "ignore": [
     "**/.*",
     "node_modules",
