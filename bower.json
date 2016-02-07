@@ -1,8 +1,9 @@
 {
-  "name": "polymer-chords",
+  "name": "uke-chords",
   "authors": [
     "Florin Alexandrescu <pianosnake@gmail.com>"
   ],
+  "version": "0.1.0",
   "description": "Polymer HTML element for ukulele chord diagrams",
   "main": "index.html",
   "moduleType": [],
@@ -16,7 +17,7 @@
     "notation"
   ],
   "license": "MIT",
-  "homepage": "http://pianosnake.github.io/polymer-chords",
+  "homepage": "http://pianosnake.github.io/uke-chords",
   "ignore": [
     "**/.*",
     "node_modules",
