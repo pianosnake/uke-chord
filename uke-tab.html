@@ -71,14 +71,14 @@
         properties: {
           frets: String,
           fingers: String,
-          nonut: Boolean
+          nut: Boolean
         },
         attached: function(){
           this.parseFrets();
           this.parseFingers();
 
-          if(this.nonut){
-            this.toggleClass("hidden", this.nonut, this.$.nut);
+          if(!this.nut){
+            this.toggleClass("hidden", !this.nut, this.$.nut);
           }
         },
 
