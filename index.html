@@ -2,9 +2,9 @@
 <head>
 
   <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="uke-tab.html">
+  <link rel="import" href="uke-chord.html">
   <style>
-    uke-tab{
+    uke-chord{
       margin-right: 30px;
     }
   </style>
@@ -13,27 +13,27 @@
 <body>
 
 <p>Here is a diminished chord. You can play this anywhere on the fretboard.</p>
-<uke-tab frets="2323"></uke-tab>
+<uke-chord frets="2323"></uke-chord>
 
 <p>If we move the first note down one fret toward the nut we end up with a Major 7th chord.</p>
-<uke-tab frets="1323"></uke-tab>
+<uke-chord frets="1323"></uke-chord>
 
 <p>If we move the second note down one fred we get another Major 7th chord</p>
 
-<uke-tab frets="2223"></uke-tab>
+<uke-chord frets="2223"></uke-chord>
 
 <p>Moving the third note down has the same result.</p>
-<uke-tab frets="2313"></uke-tab>
+<uke-chord frets="2313"></uke-chord>
 
 <p>And finally, moving the last note down we get yet another Major 7th chord.</p>
-<uke-tab frets="2322"></uke-tab>
+<uke-chord frets="2322"></uke-chord>
 
 <p>Isn't that neat?! These are four ways to play Major 7th chords.</p>
 
-<p>Now, let's look back at that first Major 7th chord we got. If we move that chord down until one finger is off the fretboard,
+<p>Now, let's look back at the third chord we got. If we move that chord down until one finger is off the fretboard,
 we end up with a familiar chord. That's the E7 chord!</p>
 
-<uke-tab frets="1202" nut></uke-tab>
+<uke-chord frets="1202" nut name="E7" sub="00R0"></uke-chord>
 
 <p>We'll call this the E7 shape. Where is the E in all this? Why, it's on the
 open string, string #2. That's the root of the chord. So, for all chords of this shape, the root will be on the 2nd string and you'll
@@ -42,17 +42,18 @@ play it with your index finger.</p>
 <p>Quickly try to find a G7 chord using this pattern. How about an A7?</p>
 
 <h2>V7 - I progressions</h2>
-<p>The Major 7th chord is often the dominant, aka V7 and in that position it usually moves to the I chord.</p>
-<uke-tab frets="1211" fingers="1311" sub="000R"></uke-tab>
-<uke-tab frets="3331" fingers="3331" sub="0R00"></uke-tab>
+<p>The Major 7th chord is often the dominant, aka V7 and from that position it usually moves to the I chord. Some I chords are easier to reach than others.
+Here are a few suggestions. The R indicates the root note of the chord. This makes it easy to build a chord on a particular note.</p>
+<uke-chord frets="1211" fingers="1311" sub="000R"></uke-chord>
+<uke-chord frets="3331" fingers="3331" sub="0R00"></uke-chord>
 <br>
-<uke-tab frets="1112" fingers="1113" sub="0R00"></uke-tab>
-<uke-tab frets="3121" fingers="4131" sub="00R0"></uke-tab>
+<uke-chord frets="1112" fingers="1113" sub="0R00"></uke-chord>
+<uke-chord frets="3121" fingers="4131" sub="00R0"></uke-chord>
 <br>
-<uke-tab frets="2313" fingers="3214" sub="00R0"></uke-tab>
-<uke-tab frets="3211" fingers="3211" sub="R00R"></uke-tab>
+<uke-chord frets="2313" fingers="3214" sub="00R0"></uke-chord>
+<uke-chord frets="3211" fingers="3211" sub="R00R"></uke-chord>
 <br>
-<uke-tab frets="1323" fingers="1324" sub="R000"></uke-tab>
-<uke-tab frets="1114" fingers="1114" sub="0R0R"></uke-tab>
+<uke-chord frets="1323" fingers="1324" sub="R000"></uke-chord>
+<uke-chord frets="1114" fingers="1114" sub="0R0R"></uke-chord>
 </body>
 </html>

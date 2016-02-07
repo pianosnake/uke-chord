@@ -1,27 +1,26 @@
 <link rel="import" href="../polymer/polymer.html">
-<dom-module id="uke-tab">
+<dom-module id="uke-chord">
   <template>
     <style>
       :host {
         display: inline-block;
       }
-
       .hidden {
         visibility: hidden;
       }
-
-      #ukeTabSvg {
+      #ukeChordSvg #subText, #ukeChordSvg #closedStrings {
         font-family: sans-serif;
         font-size: 11px;
       }
-
-      .red {
-        color: red;
+      #ukeChordSvg #chordName{
+        font-size: 16px;
       }
     </style>
-    <svg id="ukeTabSvg" width="72" height="111" xmlns="http://www.w3.org/2000/svg"
+    <svg id="ukeChordSvg" width="72" height="111" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink">
-      <g id="svg_1" transform="translate(5,12)">
+      <text id="chordName" x="36" y="16" text-anchor="middle"></text>
+      <g id="svgChord" transform="translate(5,12)">
+
         <rect id="nut" height="4" width="62" fill="black"/>
         <g id="strings" transform="translate(0,2)">
           <rect height="80" width="2" x="0" fill="black"/>
@@ -54,7 +53,7 @@
             <text fill="white" id="finger3" x="57" y="4"></text>
           </g>
         </g>
-        <g id="openStrings" transform="translate(1,-7)">
+        <g id="openStrings" transform="translate(1,-5)">
           <circle id="openString0" cx="0" r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1"/>
@@ -73,10 +72,11 @@
   <script>
     (function(){
       Polymer({
-        is: "uke-tab",
+        is: "uke-chord",
         properties: {
           frets: String,
           fingers: String,
+          name: String,
           sub: String,
           nut: Boolean
         },
@@ -85,11 +85,24 @@
           this.parseFingers();
           this.showNut();
           this.parseSubText();
+          this.showName();
         },
 
         showNut: function(){
           if(!this.nut){
             this.toggleClass("hidden", !this.nut, this.$.nut);
+          }
+        },
+
+        _translate: function(x, y, el){
+          el.setAttribute("transform", "translate("+x+","+y+")");
+        },
+
+        showName: function(){
+          if(this.name){
+            this._translate(5, 28, this.$.svgChord);
+            this.$.chordName.innerHTML = this.name;
+            this.$.ukeChordSvg.setAttribute("height", 133);
           }
         },
 
@@ -101,7 +114,7 @@
           frets.forEach(function(fret, idx){
             this.toggleClass("hidden", fret !== "0", this.$["openString" + idx]);
             this.toggleClass("hidden", fret === "0", this.$["closedString" + idx]);
-            this.$["closedString" + idx].setAttribute("transform", "translate(0," + (fret - 1) * 20 + ")");
+            this._translate(0, (fret - 1) * 20, this.$["closedString" + idx]);
 
           }.bind(this));
         },
