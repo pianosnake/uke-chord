@@ -16,7 +16,7 @@
         font-size: 16px;
       }
     </style>
-    <svg id="ukeChordSvg" width="83" height="111" viewBox="0 0 78 111" xmlns="http://www.w3.org/2000/svg"
+    <svg id="ukeChordSvg" width="84" height="112" viewBox="0 0 84 112" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink">
       <text id="chordName" x="36" y="16" text-anchor="middle"></text>
       <g id="svgChord" transform="translate(9,12)">
@@ -108,8 +108,8 @@
           if(this.name){
             this._translate(5, 28, this.$.svgChord);
             this.$.chordName.innerHTML = this.name;
-            this.$.ukeChordSvg.setAttribute("height", 133);
-            this.$.ukeChordSvg.setAttribute("viewBox", "0 0 78 133");
+            this.$.ukeChordSvg.setAttribute("height", 134);
+            this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
           }
         },
 
@@ -149,8 +149,12 @@
         setSize: function(){
           if(!this.size) return;
           if(this.size === "L" || this.size === "l"){
-            this.$.ukeChordSvg.setAttribute("height", 222);
-            this.$.ukeChordSvg.setAttribute("width", 144);
+            this.$.ukeChordSvg.setAttribute("width", 168);
+            if(this.name){
+              this.$.ukeChordSvg.setAttribute("height", 268);
+            }else{
+              this.$.ukeChordSvg.setAttribute("height", 224);
+            }
           }
         },
 

@@ -3,7 +3,7 @@
   "authors": [
     "Florin Alexandrescu <pianosnake@gmail.com>"
   ],
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Polymer HTML element for ukulele chord diagrams",
   "main": "index.html",
   "moduleType": [],
