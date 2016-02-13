@@ -16,20 +16,23 @@
         font-size: 16px;
       }
     </style>
-    <svg id="ukeChordSvg" width="72" height="111" xmlns="http://www.w3.org/2000/svg"
+    <svg id="ukeChordSvg" width="78" height="111" viewBox="0 0 78 111" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink">
       <text id="chordName" x="36" y="16" text-anchor="middle"></text>
       <g id="svgChord" transform="translate(5,12)">
 
         <rect id="nut" height="4" width="62" fill="black"/>
+        <g id="diamond" class="hidden">
+          <rect width="14" height="14" transform="translate(0,-10),rotate(45)"></rect>
+        </g>
         <g id="strings" transform="translate(0,2)">
-          <rect height="80" width="2" x="0" fill="black"/>
+          <rect height="80" width="2" x="0"  fill="black"/>
           <rect height="80" width="2" x="20" fill="black"/>
           <rect height="80" width="2" x="40" fill="black"/>
           <rect height="80" width="2" x="60" fill="black"/>
         </g>
         <g id="frets" transform="translate(0,2)">
-          <rect height="2" width="62" y="0" fill="black"/>
+          <rect height="2" width="62" y="0"  fill="black"/>
           <rect height="2" width="62" y="20" fill="black"/>
           <rect height="2" width="62" y="40" fill="black"/>
           <rect height="2" width="62" y="60" fill="black"/>
@@ -37,24 +40,24 @@
         </g>
         <g id="closedStrings" transform="translate(1,13)">
           <g id=closedString0>
-            <circle cx="0" r="6"/>
-            <text fill="white" id="finger0" x="-3" y="4"></text>
+            <circle r="6"/>
+            <text fill="white" id="finger0" y="4" text-anchor="middle"></text>
           </g>
           <g id="closedString1">
-            <circle cx="20" r="6"/>
-            <text fill="white" id="finger1" x="17" y="4"></text>
+            <circle r="6"/>
+            <text fill="white" id="finger1" y="4" text-anchor="middle"></text>
           </g>
           <g id="closedString2">
-            <circle cx="40" r="6"/>
-            <text fill="white" id="finger2" x="37" y="4"></text>
+            <circle r="6"/>
+            <text fill="white" id="finger2" y="4" text-anchor="middle"></text>
           </g>
           <g id="closedString3">
-            <circle cx="60" r="6"/>
-            <text fill="white" id="finger3" x="57" y="4"></text>
+            <circle r="6"/>
+            <text fill="white" id="finger3" y="4" text-anchor="middle"></text>
           </g>
         </g>
         <g id="openStrings" transform="translate(1,-5)">
-          <circle id="openString0" cx="0" r="4" fill="none" stroke="black" stroke-width="1"/>
+          <circle id="openString0" cx="0"  r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1"/>
@@ -65,7 +68,6 @@
           <text id="subText2" x="40"></text>
           <text id="subText3" x="60"></text>
         </g>
-
       </g>
     </svg>
   </template>
@@ -78,7 +80,9 @@
           fingers: String,
           name: String,
           sub: String,
-          nut: Boolean
+          nut: Boolean,
+          size: String,
+          r: String
         },
         attached: function(){
           this.parseFrets();
@@ -86,6 +90,8 @@
           this.showNut();
           this.parseSubText();
           this.showName();
+          this.setSize();
+          this.setRoot();
         },
 
         showNut: function(){
@@ -103,6 +109,7 @@
             this._translate(5, 28, this.$.svgChord);
             this.$.chordName.innerHTML = this.name;
             this.$.ukeChordSvg.setAttribute("height", 133);
+            this.$.ukeChordSvg.setAttribute("viewBox", "0 0 78 133");
           }
         },
 
@@ -114,7 +121,7 @@
           frets.forEach(function(fret, idx){
             this.toggleClass("hidden", fret !== "0", this.$["openString" + idx]);
             this.toggleClass("hidden", fret === "0", this.$["closedString" + idx]);
-            this._translate(0, (fret - 1) * 20, this.$["closedString" + idx]);
+            this._translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
 
           }.bind(this));
         },
@@ -137,6 +144,27 @@
           subText.forEach(function(text, idx){
             this.$["subText" + idx].innerHTML = text !== "0" ? text : "";
           }.bind(this));
+        },
+
+        setSize: function(){
+          if(!this.size) return;
+          if(this.size === "L" || this.size === "l"){
+            this.$.ukeChordSvg.setAttribute("height", 222);
+            this.$.ukeChordSvg.setAttribute("width", 144);
+          }
+        },
+
+        setRoot: function(){
+          if(!this.r) return;
+          if(this.r > 4 || this.r < 1) return;
+          var stringIdx = 4 - this.r;
+          var string = this.$["closedString" + stringIdx];
+          var circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
+          var diamond = this.$.diamond;
+          this.toggleClass("hidden", false, diamond);
+          diamond = this.$.svgChord.removeChild(diamond);
+          string.insertBefore(diamond, circle);
+          string.removeChild(circle);
         }
       });
     })();
