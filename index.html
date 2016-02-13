@@ -14,20 +14,24 @@
 
 <p>Create a chord diagram by inserting a &lt;uke-chord&gt; element in your HTML. Set the frets attribute to the desired frets that should be played. An F chord for example would have frets set to 2010</p>
 
-  <uke-chord frets="2010" r=4></uke-chord>
+  <uke-chord frets="2001" r=4></uke-chord>
+  <uke-chord frets="2001" r=1 sub="TEST"></uke-chord>
 
 <p>To add figerings use a fingers attribute</p>
 
-<uke-chord frets="1323" fingers="1324" r=1 size='L'></uke-chord>
+<uke-chord frets="1323" fingers="1324" r=1 size='L' sub="A00F"></uke-chord>
+<uke-chord frets="1323" fingers="1324" r=4 size='L'></uke-chord>
 
 <p>To add a chord name use a `name` attribute. To add text under each string, such as root position indicators use a `sub` attribute with 0's for blanks. This text is currently limited to one character per string.
   To show the nut use the `nut` attribute.</p>
 
-<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut r=2></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut r=1></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut r=4></uke-chord>
 
 <p>Make the diagrams larger by passing a `size="L"` attribute. Show the root on the diagram with a diamond head by passing a `root` attribute set to the string where the root of the chord is found. For example a root on the 3rd string would look like this: `root=3` attribute. </p>
 
 <uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut size="L" r=1></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut size="L" r=4></uke-chord>
 
 </body>
 </html>

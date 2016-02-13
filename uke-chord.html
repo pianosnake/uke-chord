@@ -18,7 +18,7 @@
     </style>
     <svg id="ukeChordSvg" width="84" height="112" viewBox="0 0 84 112" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink">
-      <text id="chordName" x="36" y="16" text-anchor="middle"></text>
+      <text id="chordName" x="42" y="16" text-anchor="middle"></text>
       <g id="svgChord" transform="translate(9,12)">
 
         <rect id="nut" height="4" width="62" fill="black"/>
@@ -106,7 +106,7 @@
 
         showName: function(){
           if(this.name){
-            this._translate(5, 28, this.$.svgChord);
+            this._translate(9, 28, this.$.svgChord);
             this.$.chordName.innerHTML = this.name;
             this.$.ukeChordSvg.setAttribute("height", 134);
             this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
