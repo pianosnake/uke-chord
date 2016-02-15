@@ -88,7 +88,7 @@
           this.parseFrets();
           this.parseFingers();
           this.showNut();
-          this.parseSubText();
+          this.parseSub();
           this.showName();
           this.setSize();
           this.setRoot();
@@ -136,13 +136,13 @@
           }.bind(this));
         },
 
-        parseSubText: function(){
+        parseSub: function(){
           var subText;
           if(!this.sub) return;
           subText = this.sub.split("");
           if(subText.length !== 4) return;
           subText.forEach(function(text, idx){
-            this.$["subText" + idx].innerHTML = text !== "0" ? text : "";
+            this.$["subText" + idx].innerHTML = text !== "_" ? text : "";
           }.bind(this));
         },
 

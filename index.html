@@ -7,6 +7,9 @@
     uke-chord{
       margin-right: 30px;
     }
+    .page-break{
+      page-break-after: always;
+    }
   </style>
 </head>
 
@@ -19,19 +22,49 @@
 
 <p>To add figerings use a fingers attribute</p>
 
-<uke-chord frets="1323" fingers="1324" r=1 size='L' sub="A00F"></uke-chord>
+<uke-chord frets="1323" fingers="1324" r=1 size='L' sub="A__F"></uke-chord>
 <uke-chord frets="1323" fingers="1324" r=4 size='L'></uke-chord>
 
 <p>To add a chord name use a `name` attribute. To add text under each string, such as root position indicators use a `sub` attribute with 0's for blanks. This text is currently limited to one character per string.
   To show the nut use the `nut` attribute.</p>
 
-<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut r=1></uke-chord>
-<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut r=4></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="__R_" name="F7" nut r=1></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="__R_" name="F7" nut r=4></uke-chord>
 
 <p>Make the diagrams larger by passing a `size="L"` attribute. Show the root on the diagram with a diamond head by passing a `root` attribute set to the string where the root of the chord is found. For example a root on the 3rd string would look like this: `root=3` attribute. </p>
 
-<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut size="L" r=1></uke-chord>
-<uke-chord frets="2313" fingers="3214" sub="00R0" name="F7" nut size="L" r=4></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="__R_" name="F7" nut size="L" r=1></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="__R_" name="F7" nut size="L" r=4></uke-chord>
+
+
+<div class="page-break"></div>
+
+<h2>Progressions</h2>
+<uke-chord frets="3323" r=1 name="iiø" fingers="2314"></uke-chord>
+<uke-chord frets="2313" r=2 name="V7" fingers="2314"></uke-chord>
+<uke-chord frets="3111" r=1 name="i" fingers="4111"></uke-chord>
+<uke-chord frets="3211" r=1 name="I" fingers="3211" sub="R__R"></uke-chord>
+
+<br>
+
+<uke-chord frets="2423" r=2 fingers="1423"></uke-chord>
+<uke-chord frets="2322" r=1 fingers="1311"></uke-chord>
+<uke-chord frets="4432" r=3 fingers="4321"></uke-chord>
+<uke-chord frets="4442" r=3 fingers="3331"></uke-chord>
+
+<br>
+
+<uke-chord frets="2333" r=4 fingers="1333"></uke-chord>
+<uke-chord frets="2223" r=3 fingers="1113"></uke-chord>
+<uke-chord frets="3231" r=2 fingers="4231"></uke-chord>
+<uke-chord frets="4232" r=2 fingers="4131" ></uke-chord>
+
+<br>
+
+<uke-chord frets="2324" r=3 fingers="1324"></uke-chord>
+<uke-chord frets="1323" r=4 fingers="1324"></uke-chord>
+<uke-chord frets="1444" r=1 fingers="1444"></uke-chord>
+<uke-chord frets="1114" r=1 fingers="1114" sub="_R_R"></uke-chord>
 
 </body>
 </html>
