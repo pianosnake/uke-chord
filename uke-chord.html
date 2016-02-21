@@ -160,15 +160,19 @@
 
         setRoot: function(){
           if(!this.r) return;
-          if(this.r > 4 || this.r < 1) return;
-          var stringIdx = 4 - this.r;
-          var string = this.$["closedString" + stringIdx];
-          var circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
-          var diamond = this.$.diamond;
-          this.toggleClass("hidden", false, diamond);
-          diamond = this.$.svgChord.removeChild(diamond);
-          string.insertBefore(diamond, circle);
-          string.removeChild(circle);
+          var roots = this.r.split("");
+
+          roots.forEach(function(root){
+            root = parseInt(root);
+            if(root > 4 || root < 1) return;
+            var stringIdx = 4 - root;
+            var string = this.$["closedString" + stringIdx];
+            var circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
+            var diamond = this.$.diamond.cloneNode(true);
+            this.toggleClass("hidden", false, diamond);
+            string.insertBefore(diamond, circle);
+            string.removeChild(circle);
+          }.bind(this));
         }
       });
     })();
