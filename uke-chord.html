@@ -62,17 +62,19 @@
           <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1"/>
           <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1"/>
         </g>
-        <g id="subText" transform="translate(-3,98)">
-          <text id="subText0" x="0"></text>
-          <text id="subText1" x="20"></text>
-          <text id="subText2" x="40"></text>
-          <text id="subText3" x="60"></text>
+        <g id="subText" transform="translate(1,98)">
+          <text id="subText0" x="0" text-anchor="middle"></text>
+          <text id="subText1" x="20" text-anchor="middle"></text>
+          <text id="subText2" x="40" text-anchor="middle"></text>
+          <text id="subText3" x="60" text-anchor="middle"></text>
         </g>
       </g>
     </svg>
   </template>
   <script>
     (function(){
+      var stringsNum = 4;
+
       Polymer({
         is: "uke-chord",
         properties: {
@@ -117,7 +119,7 @@
           var frets;
           if(!this.frets) return;
           frets = this.frets.split("");
-          if(frets.length !== 4) return;
+          if(frets.length !== stringsNum) return;
           frets.forEach(function(fret, idx){
             this.toggleClass("hidden", fret !== "0", this.$["openString" + idx]);
             this.toggleClass("hidden", fret === "0", this.$["closedString" + idx]);
@@ -130,7 +132,7 @@
           var fingers;
           if(!this.fingers) return;
           fingers = this.fingers.split("");
-          if(fingers.length !== 4) return;
+          if(fingers.length !== stringsNum) return;
           fingers.forEach(function(finger, idx){
             this.$["finger" + idx].innerHTML = finger !== "0" ? finger : "";
           }.bind(this));
@@ -139,8 +141,15 @@
         parseSub: function(){
           var subText;
           if(!this.sub) return;
-          subText = this.sub.split("");
-          if(subText.length !== 4) return;
+
+          //if using commas in the sub text as separators
+          if(this.sub.indexOf(",")>0){
+            subText = this.sub.split(",");
+          }else{
+            subText = this.sub.split("");
+          }
+          if(subText.length !== stringsNum) return;
+
           subText.forEach(function(text, idx){
             this.$["subText" + idx].innerHTML = text !== "_" ? text : "";
           }.bind(this));
@@ -164,8 +173,8 @@
 
           roots.forEach(function(root){
             root = parseInt(root);
-            if(root > 4 || root < 1) return;
-            var stringIdx = 4 - root;
+            if(root > stringsNum || root < 1) return;
+            var stringIdx = stringsNum - root;
             var string = this.$["closedString" + stringIdx];
             var circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
             var diamond = this.$.diamond.cloneNode(true);
