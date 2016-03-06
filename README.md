@@ -19,7 +19,7 @@ Install using [Bower](http://bower.io/)
 
 	bower install uke-chord
 
-Import the webcomponents.js polyfill and link `uke-chord` element in the HEAD tag.
+Import the webcomponents.js polyfill and link `uke-chord.html` in the HEAD tag.
 
 	<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 	<link rel="import" href="bower_components/uke-chord/uke-chord.html">
