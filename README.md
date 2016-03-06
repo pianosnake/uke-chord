@@ -8,7 +8,7 @@ A [Polymer](https://www.polymer-project.org) element for a ukulele chord diagram
 
 ### Using the repo directly
 
-Download this repo using the 'Download' button and load the two files from the `dist` directory into your page's HEAD tag.
+Download this repo using the 'Download' button and load the two files from the `dist` directory into your page's HEAD tag. The HTML file is [vulcanized](https://github.com/Polymer/vulcanize) to include all Polymer dependencies.
 	
 	<script src="dist/webcomponents-lite.min.js"></script>
 	<link rel="import" href="dist/uke-chord.html">
@@ -30,7 +30,7 @@ Download this repo and submit pull requests.
 
 Start `polyserve` and visit <http://localhost:8080/components/uke-chord/>
 
-Run `gulp` to populate the dist directory before pushing changes.
+Run `gulp` to populate the dist directory before pushing changes and vulcanize all Polymer dependencies.
 
 ## License
 
