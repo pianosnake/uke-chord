@@ -30,7 +30,7 @@ Download this repo and submit pull requests.
 
 Start `polyserve` and visit <http://localhost:8080/components/uke-chord/>
 
-Run `gulp` to populate the dist directory before pushing changes and vulcanize all Polymer dependencies.
+Before pushing changes, run `gulp` to populate the dist directory and vulcanize all Polymer dependencies.
 
 ## License
 
