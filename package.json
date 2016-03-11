@@ -1,0 +1,32 @@
+{
+  "name": "uke-chord",
+  "version": "0.4.0",
+  "description": "Polymer HTML element for ukulele chord diagrams",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pianosnake/uke-chord.git"
+  },
+  "keywords": [
+    "ukulele",
+    "chord",
+    "diagram",
+    "web-components",
+    "polymer"
+  ],
+  "author": "Florin Alexandrescu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pianosnake/uke-chord/issues"
+  },
+  "homepage": "http://pianosnake.github.io/uke-chord/",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-vulcanize": "^6.1.0",
+    "vulcanize": "^1.14.7"
+  }
+}
