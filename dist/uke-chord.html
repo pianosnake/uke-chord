@@ -7610,23 +7610,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: inline-block;
       }
-      .hidden {
-        visibility: hidden;
-      }
-      #ukeChordSvg #subText, #ukeChordSvg #closedStrings {
-        font-family: sans-serif;
-        font-size: 11px;
-      }
-      #ukeChordSvg #chordName{
-        font-size: 16px;
-      }
     </style>
-    <svg id="ukeChordSvg" width="84" height="112" viewBox="0 0 84 112" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <text id="chordName" x="42" y="16" text-anchor="middle"></text>
+    <svg id="ukeChordSvg" width="84" height="112" viewBox="0 0 84 112" style="font-family: sans-serif; font-size: 11px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <title>[[title]] chord | http://pianosnake.github.io/uke-chord/</title>
+      <text id="chordName" x="42" y="16" text-anchor="middle" style="font-size: 16px;"></text>
       <g id="svgChord" transform="translate(9,12)">
 
-        <rect id="nut" height="4" width="62" fill="black"></rect>
-        <g id="diamond" class="hidden">
+        <rect id="nut" height="4" width="62" fill="black" style="visibility: hidden;"></rect>
+        <g id="diamond" style="visibility:hidden;">
           <rect width="14" height="14" transform="translate(0,-10),rotate(45)"></rect>
         </g>
         <g id="strings" transform="translate(0,2)">
@@ -7643,28 +7634,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <rect height="2" width="62" y="80" fill="black"></rect>
         </g>
         <g id="closedStrings" transform="translate(1,13)">
-          <g id="closedString0">
+          <g id="closedString0" style="visibility: hidden;">
             <circle r="6"></circle>
             <text fill="white" id="finger0" y="4" text-anchor="middle"></text>
           </g>
-          <g id="closedString1">
+          <g id="closedString1" style="visibility: hidden;">
             <circle r="6"></circle>
             <text fill="white" id="finger1" y="4" text-anchor="middle"></text>
           </g>
-          <g id="closedString2">
+          <g id="closedString2" style="visibility: hidden;">
             <circle r="6"></circle>
             <text fill="white" id="finger2" y="4" text-anchor="middle"></text>
           </g>
-          <g id="closedString3">
+          <g id="closedString3" style="visibility: hidden;">
             <circle r="6"></circle>
             <text fill="white" id="finger3" y="4" text-anchor="middle"></text>
           </g>
         </g>
         <g id="openStrings" transform="translate(1,-5)">
-          <circle id="openString0" cx="0" r="4" fill="none" stroke="black" stroke-width="1"></circle>
-          <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1"></circle>
-          <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1"></circle>
-          <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1"></circle>
+          <circle id="openString0" cx="0" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"></circle>
+          <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"></circle>
+          <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"></circle>
+          <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"></circle>
         </g>
         <g id="subText" transform="translate(1,98)">
           <text id="subText0" x="0" text-anchor="middle"></text>
@@ -7674,6 +7665,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </g>
       </g>
     </svg>
+
+    <img src="[[imgSrc]]">
   </template>
   <script>
     (function(){
@@ -7690,6 +7683,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           size: String,
           r: String
         },
+
         attached: function(){
           this.parseFrets();
           this.parseFingers();
@@ -7698,11 +7692,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.showName();
           this.setSize();
           this.setRoot();
+
+          //Manipulate the SVG and then dump it all in the img tag as base64
+          var html = this.$.ukeChordSvg.outerHTML;
+          //works precicely because 'unescape' is buggy
+          this.imgSrc = 'data:image/svg+xml;base64,'+ btoa(unescape(encodeURIComponent(html)));
+          Polymer.dom(this.root).removeChild(this.$.ukeChordSvg);
         },
 
         showNut: function(){
-          if(!this.nut){
-            this.toggleClass("hidden", !this.nut, this.$.nut);
+          if(this.nut){
+            this.$.nut.style.visibility = "visible";
           }
         },
 
@@ -7711,11 +7711,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         showName: function(){
-          if(this.name){
+          if(this.name && this.name.length > 0){
             this._translate(9, 28, this.$.svgChord);
             this.$.chordName.innerHTML = this.name;
             this.$.ukeChordSvg.setAttribute("height", 134);
             this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
+            this.title = this.name;
+          }else{
+            this.title = "Ukulele";
           }
         },
 
@@ -7725,8 +7728,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           frets = this.frets.split("");
           if(frets.length !== stringsNum) return;
           frets.forEach(function(fret, idx){
-            this.toggleClass("hidden", fret !== "0", this.$["openString" + idx]);
-            this.toggleClass("hidden", fret === "0", this.$["closedString" + idx]);
+
+            if(fret === "0"){
+              this.$["openString" + idx].style.visibility = "visible";
+            }else{
+              this.$["closedString" + idx].style.visibility = "visible";
+            }
+
             this._translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
 
           }.bind(this));
@@ -7782,12 +7790,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var string = this.$["closedString" + stringIdx];
             var circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
             var diamond = this.$.diamond.cloneNode(true);
-            this.toggleClass("hidden", false, diamond);
-            string.insertBefore(diamond, circle);
-            string.removeChild(circle);
+            diamond.style.visibility = "visible";
+            Polymer.dom(string).insertBefore(diamond, circle);
+            Polymer.dom(string).removeChild(circle);
           }.bind(this));
         }
       });
     })();
   </script>
-</dom-module></body></html>
+</dom-module>
+</body></html>
