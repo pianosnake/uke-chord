@@ -2,7 +2,7 @@
 
 A [Polymer](https://www.polymer-project.org) element for a ukulele chord diagram using SVG graphics. See usage examples and a live demo at <http://pianosnake.github.io/uke-chord/>
 
-![alt tag](https://92fcb41a43d1d336366489008203152e7a54f1a8-www.googledrive.com/host/0B2yJBQz-_X5XSk9KMXd0UEgzYmM/sample-chord.png)
+![alt tag](http://pianosnake.github.io/uke-chord/big-f.svg)
 
 ## Install
 
