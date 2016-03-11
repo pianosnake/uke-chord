@@ -93,8 +93,8 @@
 
           //Manipulate the SVG and then dump it all in the img tag as base64
           var html = this.$.ukeChordSvg.outerHTML;
-          var bytes = utf8.encode(html);
-          this.imgSrc = 'data:image/svg+xml;base64,'+ base64.encode(bytes);
+          //works precicely because 'unescape' is buggy
+          this.imgSrc = 'data:image/svg+xml;base64,'+ btoa(unescape(encodeURIComponent(html)));
           Polymer.dom(this.root).removeChild(this.$.ukeChordSvg);
         },
 
