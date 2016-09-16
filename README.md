@@ -1,6 +1,6 @@
 # &lt;uke-chord&gt;
 
-A [Polymer](https://www.polymer-project.org) element for a ukulele chord diagram using SVG graphics. See usage examples and a live demo at <http://pianosnake.github.io/uke-chord/>
+A [Polymer](https://www.polymer-project.org) element for a ukulele chord diagram using SVG graphics. See [usage examples and a live demo here](http://pianosnake.github.io/uke-chord/)
 
 ![alt tag](http://pianosnake.github.io/uke-chord/big-f.svg)
 
