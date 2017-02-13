@@ -27,10 +27,14 @@
 <uke-chord frets="1320" fingers="1324" r=4 size='L'></uke-chord>
 
 <p>To add a chord name use a `name` attribute. To add text under each string, such as root position indicators use a `sub` attribute with 0's for blanks. This text is currently limited to one character per string.
-  To show the nut use the `nut` attribute.</p>
+  To show the nut use the `position` attribute set to 0.</p>
 
-<uke-chord frets="2313" fingers="3214" sub="___R" name="F7" nut r=1></uke-chord>
-<uke-chord frets="2313" fingers="3214" sub="R___" name="F7" nut r=4></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="___R" name="F7" position=0 r=1></uke-chord>
+<uke-chord frets="2313" fingers="3214" sub="R___" name="F7" position=0 r=4></uke-chord>
+
+<p>Set position to a number above 0 to see it displayed in the upper left of the diagram.</p>
+
+<uke-chord frets="2313" fingers="3214" sub="___R" position=10 r=1></uke-chord>
 
 <p>Make the diagrams larger by passing a `size="L"` attribute. Show the root on the diagram with a diamond head by passing a `root` attribute set to the string where the root of the chord is found. For example a root on the 3rd string would look like this: `root=3` attribute. </p>
 
