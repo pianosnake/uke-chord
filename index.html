@@ -11,7 +11,6 @@
 
 <script src="webcomponents-lite.min.js"></script>
 <script src="uke-chord.js" type="module"></script>
- 
 
 </head>
 <body>
@@ -49,29 +48,11 @@
   <uke-chord frets="2313" fingers="3214" name="F7" size="L" r=2 sub="3,♭7,R,5"></uke-chord>
 
 <h2>Install</h2>
-  <h3>Using the files directly</h3>
-  <p>Download this repo using the 'Download' button and load the two files from the dist directory into your page's HEAD tag. The HTML file includes all dependencies.
+  <p>Download this repo using the 'Download' button and load the two JS files into your page's HEAD tag.
 
-  <pre><code>&lt;script src="dist/webcomponents-lite.min.js"&gt;&lt;/script&gt;
-&lt;link rel="import" href="dist/uke-chord.html"&gt;
+  <pre><code>&lt;script src="webcomponents-lite.min.js"&gt;&lt;/script&gt;
+&lt;link rel="import" type="module" href="uke-chord.html"&gt;
 </code></pre>
-
-  <h3>Using Bower</h3>
-
-<pre><code>bower install uke-chord
-</code></pre>
-
-<p>Link the webcomponents.js and <code>uke-chord</code> element in the HEAD tag.</p>
-
-<pre><code>&lt;script src="bower_components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
-&lt;link rel="import" href="bower_components/uke-chord/uke-chord.html"&gt;
-</code></pre>
-
-  <h2>In the wild</h2>
-
-  <p>Here are a few blog posts I wrote using this element</p>
-  <blogger-list labels="ukulele" blog-id="6321600142310040063" asc
-                api-key="AIzaSyCK9jp0SSsD6CXPWAY2Z_XvaVZdrhoR4LU"></blogger-list>
 
 <footer class="site-footer">
   <span class="site-footer-owner"><a href="https://github.com/pianosnake/uke-chord">&lt;uke-chord&gt;</a> is maintained by <a href="https://github.com/pianosnake">pianosnake</a>.</span>
@@ -79,12 +60,6 @@
 </footer>
 
 </section>
-
-<script>
-  const js = document.createElement("script");
-  js.src = "https://raw.githubusercontent.com/pianosnake/uke-chord/master/uke-chord.js";
-  document.body.appendChild(js);
-</script>
 
 </body>
 </html>
