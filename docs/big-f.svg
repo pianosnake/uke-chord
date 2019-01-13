@@ -1,0 +1,56 @@
+<svg id="ukeChordSvg" width="168" height="268" viewBox="0 0 84 134" style="font-family: sans-serif; font-size: 11px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="style-scope uke-chord">
+      <title class="style-scope uke-chord">F7 chord | http://pianosnake.github.io/uke-chord/</title>
+      <text id="chordName" x="42" y="16" text-anchor="middle" style="font-size: 16px;" class="style-scope uke-chord">F7</text>
+      <g id="svgChord" transform="translate(9,28)" class="style-scope uke-chord">
+
+        <rect id="nut" height="4" width="62" fill="black" style="visibility: visible;" class="style-scope uke-chord"></rect>
+        <g id="diamond" style="visibility:hidden;" class="style-scope uke-chord">
+          <rect width="14" height="14" transform="translate(0,-10),rotate(45)" class="style-scope uke-chord"></rect>
+        </g>
+        <g id="strings" transform="translate(0,2)" class="style-scope uke-chord">
+          <rect height="80" width="2" x="0" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="80" width="2" x="20" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="80" width="2" x="40" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="80" width="2" x="60" fill="black" class="style-scope uke-chord"></rect>
+        </g>
+        <g id="frets" transform="translate(0,2)" class="style-scope uke-chord">
+          <rect height="2" width="62" y="0" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="2" width="62" y="20" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="2" width="62" y="40" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="2" width="62" y="60" fill="black" class="style-scope uke-chord"></rect>
+          <rect height="2" width="62" y="80" fill="black" class="style-scope uke-chord"></rect>
+        </g>
+        <g id="closedStrings" transform="translate(1,13)" class="style-scope uke-chord">
+          <g id="closedString0" style="visibility: visible;" class="style-scope uke-chord" transform="translate(0,20)">
+            <circle r="6" class="style-scope uke-chord"></circle>
+            <text fill="white" id="finger0" y="4" text-anchor="middle" class="style-scope uke-chord">3</text>
+          </g>
+          <g id="closedString1" style="visibility: visible;" class="style-scope uke-chord" transform="translate(20,40)">
+            <circle r="6" class="style-scope uke-chord"></circle>
+            <text fill="white" id="finger1" y="4" text-anchor="middle" class="style-scope uke-chord">2</text>
+          </g>
+          <g id="closedString2" style="visibility: visible;" class="style-scope uke-chord" transform="translate(40,0)">
+            <g id="diamond" style="visibility: visible;" class="style-scope uke-chord">
+          <rect width="14" height="14" transform="translate(0,-10),rotate(45)" class="style-scope uke-chord"></rect>
+        </g>
+            <text fill="white" id="finger2" y="4" text-anchor="middle" class="style-scope uke-chord">1</text>
+          </g>
+          <g id="closedString3" style="visibility: visible;" class="style-scope uke-chord" transform="translate(60,40)">
+            <circle r="6" class="style-scope uke-chord"></circle>
+            <text fill="white" id="finger3" y="4" text-anchor="middle" class="style-scope uke-chord">4</text>
+          </g>
+        </g>
+        <g id="openStrings" transform="translate(1,-5)" class="style-scope uke-chord">
+          <circle id="openString0" cx="0" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;" class="style-scope uke-chord"></circle>
+          <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;" class="style-scope uke-chord"></circle>
+          <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;" class="style-scope uke-chord"></circle>
+          <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;" class="style-scope uke-chord"></circle>
+        </g>
+        <g id="subText" transform="translate(1,98)" class="style-scope uke-chord">
+          <text id="subText0" x="0" text-anchor="middle" class="style-scope uke-chord">3</text>
+          <text id="subText1" x="20" text-anchor="middle" class="style-scope uke-chord">♭7</text>
+          <text id="subText2" x="40" text-anchor="middle" class="style-scope uke-chord">R</text>
+          <text id="subText3" x="60" text-anchor="middle" class="style-scope uke-chord">5</text>
+        </g>
+      </g>
+    </svg>

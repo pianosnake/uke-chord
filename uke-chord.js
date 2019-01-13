@@ -63,7 +63,7 @@ const _translate = function (x, y, el) {
   el.setAttribute("transform", "translate(" + x + "," + y + ")");
 }
 
-export class UkeChord extends HTMLElement {
+class UkeChord extends HTMLElement {
   constructor() {
     super();
 

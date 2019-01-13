@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>uke-chord by pianosnake</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+  <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+
+<script src="../webcomponents-lite.min.js"></script>
+<script src="../uke-chord.js" type="module"></script>
+ 
+
+</head>
+<body>
+<section class="page-header">
+  <h1 class="project-name">&lt;uke-chord&gt;</h1>
+
+  <h2 class="project-tagline">Small instrument. Big diagrams.</h2>
+  <a href="https://github.com/pianosnake/uke-chord" class="btn">View on GitHub</a>
+  <a href="https://github.com/pianosnake/uke-chord/zipball/master" class="btn">Download .zip</a>
+  <a href="https://github.com/pianosnake/uke-chord/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+
+<section class="main-content">
+  <p><code>&lt;uke-chord&gt;</code> is a <a href="https://www.polymer-project.org">Polymer</a> style custom HTML element for a ukulele chord diagram using SVG graphics. It is tuning agnostic and can be used for any 4 string fretted instrument including the mandolin, <a href="https://en.wikipedia.org/wiki/Tenor_guitar">tenor guitar</a>, bass guitar, <a href="https://en.wikipedia.org/wiki/Appalachian_dulcimer">mountain dulcimer</a>, <a href="https://en.wikipedia.org/wiki/Cuatro_(instrument)">cuatro</a> and <a href="https://en.wikipedia.org/wiki/Cavaquinho">cavaquinho</a>.</p>
+
+  <h2>Use</h2>
+
+  <p>Create a chord diagram by inserting a <code>&lt;uke-chord&gt;</code> element in your HTML. Set the
+    <code>frets</code> attribute to the numeric value of the frets that should be played. For example, using a GCEA tuned ukulele an F chord would have <code>frets</code>
+    set to <code>2010</code>. The diagram automatically places an open circle above any string marked with a <code>0</code> indicating that the string should be played open.</p>
+
+<pre><code>&lt;uke-chord frets=&quot;2010&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+<uke-chord frets="2010"></uke-chord>
+
+<p>To add fingerings inside the bubbles use a <code>fingers</code> attribute. Use the <code>position</code> attribute to show a position indicator.</p>
+<pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot; position=7&gt;&lt;/uke-chord&gt;</code></pre>
+<uke-chord frets="1323" fingers="1324" position=7></uke-chord>
+
+<p>To add a chord name above the diagram use a <code>name</code> attribute. To add text under each string, such as fingerings or root position indicators use a <code>sub</code> attribute with underscores for blanks. If using more than one letter per string use a comma as a separator. To show the nut set the <code>position</code> attribute to 0.</p>
+<pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; sub=&quot;__R_&quot; position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+<uke-chord frets="2313" fingers="3214" sub="__R_" position=0 name="F7"></uke-chord>
+
+<p>Make the diagrams larger by passing a <code>size="L"</code> attribute. Show the root of the chord with a diamond head by passing an <code>r</code> attribute set to the string where the root of the chord is found. For example a root on the 3rd string would look like this: <code>r=2</code>. </p>
+  <pre><code class="html">&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; name=&quot;F7&quot; nut size=&quot;L&quot; r=2 sub=&quot;3,&#9837;7,R,5&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+  <uke-chord frets="2313" fingers="3214" name="F7" size="L" r=2 sub="3,♭7,R,5"></uke-chord>
+
+<h2>Install</h2>
+  <h3>Using the files directly</h3>
+  <p>Download this repo using the 'Download' button and load the two files from the dist directory into your page's HEAD tag. The HTML file includes all dependencies.
+
+  <pre><code>&lt;script src="dist/webcomponents-lite.min.js"&gt;&lt;/script&gt;
+&lt;link rel="import" href="dist/uke-chord.html"&gt;
+</code></pre>
+
+  <h3>Using Bower</h3>
+
+<pre><code>bower install uke-chord
+</code></pre>
+
+<p>Link the webcomponents.js and <code>uke-chord</code> element in the HEAD tag.</p>
+
+<pre><code>&lt;script src="bower_components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
+&lt;link rel="import" href="bower_components/uke-chord/uke-chord.html"&gt;
+</code></pre>
+
+  <h2>In the wild</h2>
+
+  <p>Here are a few blog posts I wrote using this element</p>
+  <blogger-list labels="ukulele" blog-id="6321600142310040063" asc
+                api-key="AIzaSyCK9jp0SSsD6CXPWAY2Z_XvaVZdrhoR4LU"></blogger-list>
+
+<footer class="site-footer">
+  <span class="site-footer-owner"><a href="https://github.com/pianosnake/uke-chord">&lt;uke-chord&gt;</a> is maintained by <a href="https://github.com/pianosnake">pianosnake</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+</section>
+
+<script>
+  const js = document.createElement("script");
+  js.src = "https://raw.githubusercontent.com/pianosnake/uke-chord/master/uke-chord.js";
+  document.body.appendChild(js);
+</script>
+
+</body>
+</html>
