@@ -1,40 +1,27 @@
 # &lt;uke-chord&gt;
 
-A [Polymer](https://www.polymer-project.org) element for a ukulele chord diagram using SVG graphics. See [usage examples and a live demo here](http://pianosnake.github.io/uke-chord/)
+A Web Component element for a ukulele chord diagram using SVG graphics with no framework dependencies.
 
 ![alt tag](http://pianosnake.github.io/uke-chord/big-f.svg)
 
-## Install
+### Usage
 
-### Using the repo directly
+Include the following script tags in your page:
 
-Download this repo using the 'Download' button and load the two files from the `dist` directory into your page's HEAD tag. The HTML file is [bundled](https://github.com/Polymer/polymer-bundler) to include all Polymer dependencies.
-	
-	<script src="dist/webcomponents-lite.min.js"></script>
-	<link rel="import" href="dist/uke-chord.html">
+```
+<script src="webcomponents-lite.min.js"></script>
+<script type="module" src="uke-chord.js"></script>
+```
 
-### Using Bower
+Then start using the custom element. See more [examples and a live demo here](http://pianosnake.github.io/uke-chord/).
 
-Install using [Bower](http://bower.io/)
-
-	bower install uke-chord
-
-Import the webcomponents.js polyfill and link `uke-chord.html` in the HEAD tag.
-
-	<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-	<link rel="import" href="bower_components/uke-chord/uke-chord.html">
+```
+  <uke-chord frets="2001"></uke-chord>
+```
 
 ## Develop
 
 Download this repo and submit pull requests.
-
-Install [Polyserve](https://github.com/Polymer/polyserve) with `npm install polyserve -g`
-
-Install [Polymer Bundler](https://github.com/Polymer/polymer-bundler) with `npm install -g polymer-bundler`
-
-Start `polyserve` and visit <http://localhost:8080/components/uke-chord/>
-
-Before pushing changes, run `gulp` to populate the dist directory and vulcanize all Polymer dependencies.
 
 ## License
 
