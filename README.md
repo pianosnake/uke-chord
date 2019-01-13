@@ -6,11 +6,11 @@ A Web Component element for a ukulele chord diagram using SVG graphics with no f
 
 ### Usage
 
-Include the following script tags in your page:
+Include the following script scripts tags in the head section of your page:
 
 ```
-<script src="webcomponents-lite.min.js"></script>
-<script type="module" src="uke-chord.js"></script>
+<script src="//pianosnake.github.io/uke-chord/webcomponents-lite.min.js"></script>
+<script type="module" src="//pianosnake.github.io/uke-chord/uke-chord.js"></script>
 ```
 
 Then start using the custom element. See more [examples and a live demo here](https://pianosnake.github.io/uke-chord/).
