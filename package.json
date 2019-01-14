@@ -2,10 +2,7 @@
   "name": "uke-chord",
   "version": "1.0.0",
   "description": "Web Component for ukulele chord diagrams",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "uke-chord.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pianosnake/uke-chord.git"
@@ -14,8 +11,7 @@
     "ukulele",
     "chord",
     "diagram",
-    "web-components",
-    "polymer"
+    "web-components"
   ],
   "author": "Florin Alexandrescu",
   "license": "MIT",

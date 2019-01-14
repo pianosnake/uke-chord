@@ -5,7 +5,7 @@
       style="font-family: sans-serif; font-size: 11px;"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink">
-  <title>[[title]] chord | http://pianosnake.github.io/uke-chord/</title>
+  <title id="title">uke-chord</title>
   <text id="chordName" x="48" y="16" text-anchor="middle" style="font-size: 16px;"></text>
   <g id="svgChord" transform="translate(19,12)">
     <text id="position" x="-14" y="17" text-anchor="middle"></text>
@@ -89,6 +89,7 @@
       this.showName();
       this.setSize();
       this.setRoot();
+      this.setTitle();
     }
 
     parseFrets() {
@@ -152,9 +153,6 @@
         this.$.chordName.innerHTML = this.name;
         this.$.ukeChordSvg.setAttribute("height", 134);
         this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
-        this.title = this.name;
-      } else {
-        this.title = "Ukulele";
       }
     }
 
@@ -185,6 +183,10 @@
         string.removeChild(circle);
       });
     }
+
+    setTitle(){
+      this.$.title.innerHTML = this.name ? this.name : 'Ukulele chord';
+    } 
   }
 
   customElements.define('uke-chord', UkeChord);
