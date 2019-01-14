@@ -10,7 +10,7 @@ Include the following script scripts tags in the head section of your page:
 
 ```
 <script src="//pianosnake.github.io/uke-chord/webcomponents-lite.min.js"></script>
-<script type="module" src="//pianosnake.github.io/uke-chord/uke-chord.js"></script>
+<script src="//pianosnake.github.io/uke-chord/uke-chord.js"></script>
 ```
 
 Then start using the custom element. See more [examples and a live demo here](https://pianosnake.github.io/uke-chord/).

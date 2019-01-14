@@ -1,4 +1,6 @@
-const svg = `
+(function () {
+
+  const svg = `
 <svg id="ukeChordSvg" width="90" height="112" viewBox="0 0 90 112"
       style="font-family: sans-serif; font-size: 11px;"
       xmlns="http://www.w3.org/2000/svg"
@@ -57,136 +59,133 @@ const svg = `
   </g>
 </svg>`;
 
-const stringsNum = 4;
+  const stringsNum = 4;
 
-const _translate = function (x, y, el) {
-  el.setAttribute("transform", "translate(" + x + "," + y + ")");
-}
-
-class UkeChord extends HTMLElement {
-  constructor() {
-    super();
-
-    // attach the named attributes to 'this'
-    for (let i = 0; i < this.attributes.length; i++) {
-      this[this.attributes[i].name] = this.attributes[i].value;
-    }
-
-    this.attachShadow({ mode: 'open' });
-    const template = document.createElement("template");
-    template.innerHTML = svg;
-
-    const elementsWithId = template.content.querySelectorAll('*[id]');
-    this.$ = {};
-    // add all svg elements with an id to this.$
-    elementsWithId.forEach(el => { this.$[el.id] = el; })
-    this.shadowRoot.appendChild(template.content);
+  const _translate = function (x, y, el) {
+    el.setAttribute("transform", "translate(" + x + "," + y + ")");
   }
 
-  connectedCallback() {
-    this.parseFrets();
-    this.parseFingers();
-    this.showPosition();
-    this.parseSub();
-    this.showName();
-    this.setSize();
-    this.setRoot();
-  }
-
-  parseFrets() {
-    if (!this.frets) return;
-
-    const frets = this.frets.split("");
-    if (frets.length !== stringsNum) return;
-
-    frets.forEach((fret, idx) => {
-      if (fret === "0") {
-        this.$["openString" + idx].style.visibility = "visible";
-      } else {
-        this.$["closedString" + idx].style.visibility = "visible";
+  class UkeChord extends HTMLElement {
+    connectedCallback() {
+      // attach the named attributes to 'this'
+      for (let i = 0; i < this.attributes.length; i++) {
+        this[this.attributes[i].name] = this.attributes[i].value;
       }
 
-      _translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
-    });
-  }
+      this.attachShadow({ mode: 'open' });
+      const template = document.createElement("template");
+      template.innerHTML = svg;
 
-  parseFingers() {
-    if (!this.fingers) return;
+      const elementsWithId = template.content.querySelectorAll('*[id]');
+      this.$ = {};
+      // add all svg elements with an id to this.$
+      elementsWithId.forEach(el => { this.$[el.id] = el; })
+      this.shadowRoot.appendChild(template.content);
 
-    const fingers = this.fingers.split("");
-    if (fingers.length !== stringsNum) return;
-
-    fingers.forEach((finger, idx) => {
-      this.$["finger" + idx].innerHTML = finger !== "0" ? finger : "";
-    });
-  }
-
-
-  showPosition() {
-    const position = parseInt(this.position);
-    if (position === 0) {
-      this.$.nut.style.visibility = "visible";
-    } else if (position > 0 && position < 100) {
-      this.$.position.innerHTML = position;
+      this.parseFrets();
+      this.parseFingers();
+      this.showPosition();
+      this.parseSub();
+      this.showName();
+      this.setSize();
+      this.setRoot();
     }
-  }
 
-  parseSub() {
-    let subText;
-    if (!this.sub) return;
+    parseFrets() {
+      if (!this.frets) return;
 
-    //if using commas in the sub text as separators
-    if (this.sub.indexOf(",") > 0) {
-      subText = this.sub.split(",");
-    } else {
-      subText = this.sub.split("");
+      const frets = this.frets.split("");
+      if (frets.length !== stringsNum) return;
+
+      frets.forEach((fret, idx) => {
+        if (fret === "0") {
+          this.$["openString" + idx].style.visibility = "visible";
+        } else {
+          this.$["closedString" + idx].style.visibility = "visible";
+        }
+
+        _translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
+      });
     }
-    if (subText.length !== stringsNum) return;
 
-    subText.forEach((text, idx) => {
-      this.$["subText" + idx].innerHTML = text !== "_" ? text : "";
-    });
-  }
+    parseFingers() {
+      if (!this.fingers) return;
 
-  showName() {
-    if (this.name && this.name.length > 0) {
-      _translate(16, 28, this.$.svgChord);
-      this.$.chordName.innerHTML = this.name;
-      this.$.ukeChordSvg.setAttribute("height", 134);
-      this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
-      this.title = this.name;
-    } else {
-      this.title = "Ukulele";
+      const fingers = this.fingers.split("");
+      if (fingers.length !== stringsNum) return;
+
+      fingers.forEach((finger, idx) => {
+        this.$["finger" + idx].innerHTML = finger !== "0" ? finger : "";
+      });
     }
-  }
 
-  setSize() {
-    if (!this.size) return;
-    if (this.size === "L" || this.size === "l") {
-      this.$.ukeChordSvg.setAttribute("width", 180);
-      if (this.name) {
-        this.$.ukeChordSvg.setAttribute("height", 268);
-      } else {
-        this.$.ukeChordSvg.setAttribute("height", 224);
+
+    showPosition() {
+      const position = parseInt(this.position);
+      if (position === 0) {
+        this.$.nut.style.visibility = "visible";
+      } else if (position > 0 && position < 100) {
+        this.$.position.innerHTML = position;
       }
     }
+
+    parseSub() {
+      let subText;
+      if (!this.sub) return;
+
+      //if using commas in the sub text as separators
+      if (this.sub.indexOf(",") > 0) {
+        subText = this.sub.split(",");
+      } else {
+        subText = this.sub.split("");
+      }
+      if (subText.length !== stringsNum) return;
+
+      subText.forEach((text, idx) => {
+        this.$["subText" + idx].innerHTML = text !== "_" ? text : "";
+      });
+    }
+
+    showName() {
+      if (this.name && this.name.length > 0) {
+        _translate(16, 28, this.$.svgChord);
+        this.$.chordName.innerHTML = this.name;
+        this.$.ukeChordSvg.setAttribute("height", 134);
+        this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
+        this.title = this.name;
+      } else {
+        this.title = "Ukulele";
+      }
+    }
+
+    setSize() {
+      if (!this.size) return;
+      if (this.size === "L" || this.size === "l") {
+        this.$.ukeChordSvg.setAttribute("width", 180);
+        if (this.name) {
+          this.$.ukeChordSvg.setAttribute("height", 268);
+        } else {
+          this.$.ukeChordSvg.setAttribute("height", 224);
+        }
+      }
+    }
+
+    setRoot() {
+      if (!this.r) return;
+
+      this.r.split("").forEach(r => {
+        const root = parseInt(r);
+        if (root > stringsNum || root < 1) return;
+        const stringIdx = stringsNum - root;
+        const string = this.$["closedString" + stringIdx];
+        const circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
+        const diamond = this.$.diamond.cloneNode(true);
+        diamond.style.visibility = "visible";
+        string.insertBefore(diamond, circle);
+        string.removeChild(circle);
+      });
+    }
   }
 
-  setRoot() {
-    if (!this.r) return;
-
-    this.r.split("").forEach(r => {
-      const root = parseInt(r);
-      if (root > stringsNum || root < 1) return;
-      const stringIdx = stringsNum - root;
-      const string = this.$["closedString" + stringIdx];
-      const circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
-      const diamond = this.$.diamond.cloneNode(true);
-      diamond.style.visibility = "visible";
-      string.insertBefore(diamond, circle);
-      string.removeChild(circle);
-    });
-  }
-}
-
-customElements.define('uke-chord', UkeChord);
+  customElements.define('uke-chord', UkeChord);
+})();
