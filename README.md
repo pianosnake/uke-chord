@@ -6,7 +6,7 @@ A Web Component element for a ukulele chord diagram using SVG graphics with no f
 
 ### Usage
 
-Include the following script scripts tags in the head section of your page:
+Include the following script tag in the head section of your page:
 
 ```
 <script src="//pianosnake.github.io/uke-chord/uke-chord.js"></script>
