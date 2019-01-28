@@ -2,7 +2,7 @@
 
 A Web Component element for a ukulele chord diagram using SVG graphics with no framework dependencies.
 
-![alt tag](https://pianosnake.github.io/uke-chord/docs/big-f.svg)
+![alt tag](https://pianosnake.github.io/uke-chord/example.svg)
 
 ### Usage
 
