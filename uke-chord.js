@@ -27,7 +27,7 @@
       <rect height="2" width="62" y="80" fill="black"/>
     </g>
     <g id="closedStrings" transform="translate(1,13)">
-      <g id=closedString0 style="visibility: hidden;">
+      <g id="closedString0" style="visibility: hidden;">
         <circle r="6"/>
         <text fill="white" id="finger0" y="4" text-anchor="middle"></text>
       </g>
@@ -44,11 +44,17 @@
         <text fill="white" id="finger3" y="4" text-anchor="middle"></text>
       </g>
     </g>
-    <g id="openStrings" transform="translate(1,-5)">
+    <g id="openStrings" transform="translate(1,-6)">
       <circle id="openString0" cx="0"  r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
       <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
       <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
       <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
+    </g>
+    <g id="xedStrings" transform="translate(-3,-10)">
+      <path id="xString0" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1"/>
+      <path id="xString1" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1" transform="translate(20,0)"/>
+      <path id="xString2" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1" transform="translate(40,0)"/>
+      <path id="xString3" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1" transform="translate(60,0)"/>
     </g>
     <g id="subText" transform="translate(1,98)">
       <text id="subText0" x="0" text-anchor="middle"></text>
@@ -101,11 +107,16 @@
       frets.forEach((fret, idx) => {
         if (fret === "0") {
           this.$["openString" + idx].style.visibility = "visible";
+        } else if(fret === "x" || fret === 'X'){
+          console.log('found an X')
+          this.$["xString" + idx].style.visibility = "visible";
         } else {
           this.$["closedString" + idx].style.visibility = "visible";
         }
 
-        _translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
+        if(parseInt(fret) > 0){
+          _translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
+        }
       });
     }
 
