@@ -1,8 +1,8 @@
 # &lt;uke-chord&gt;
 
-A Web Component element for a ukulele chord diagram using SVG graphics with no framework dependencies.
+A Web Component element for a tab chord diagrams using SVG graphics with no framework dependencies. Can be used for guitar, ukulele, 7 string guitar, 5 string charango, 3 string mountain dulcimer, etc...
 
-![alt tag](https://pianosnake.github.io/uke-chord/example.svg)
+![alt tag](https://pianosnake.github.io/uke-chord/example.png)
 
 ### Usage
 
