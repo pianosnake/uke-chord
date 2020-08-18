@@ -6,69 +6,37 @@
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink">
   <title id="title">uke-chord</title>
-  <text id="chordName" x="48" y="16" text-anchor="middle" style="font-size: 16px;"></text>
-  <g id="svgChord" transform="translate(19,12)">
+  <text id="chordName" x="50%" y="16"  text-anchor="middle" style="font-size: 16px;"></text>
+  <defs>
+    <circle id="bubble" r="6" transform="translate(1,11)"/>
+    <path id="ex" d="M0,0L8,8m0,-8L0,8" stroke="black" stroke-width="1.1" transform="translate(-3,-11)"/>
+    <circle id="openString" cx="0" r="4" fill="none" stroke="black" stroke-width="1" transform="translate(0,-7)"/>
+    <rect id="diamond" width="14" height="14" transform="translate(1,2),rotate(45)"></rect>
+  </defs>
+  <g id="svgChord">
     <text id="position" x="-14" y="17" text-anchor="middle"></text>
-    <rect id="nut" height="4" width="62" fill="black" style="visibility: hidden;"/>
-    <g id="diamond" style="visibility:hidden;">
-      <rect width="14" height="14" transform="translate(0,-10),rotate(45)"></rect>
-    </g>
-    <g id="strings" transform="translate(0,2)">
-      <rect height="80" width="2" x="0"  fill="black"/>
-      <rect height="80" width="2" x="20" fill="black"/>
-      <rect height="80" width="2" x="40" fill="black"/>
-      <rect height="80" width="2" x="60" fill="black"/>
-    </g>
-    <g id="frets" transform="translate(0,2)">
-      <rect height="2" width="62" y="0"  fill="black"/>
-      <rect height="2" width="62" y="20" fill="black"/>
-      <rect height="2" width="62" y="40" fill="black"/>
-      <rect height="2" width="62" y="60" fill="black"/>
-      <rect height="2" width="62" y="80" fill="black"/>
-    </g>
-    <g id="closedStrings" transform="translate(1,13)">
-      <g id="closedString0" style="visibility: hidden;">
-        <circle r="6"/>
-        <text fill="white" id="finger0" y="4" text-anchor="middle"></text>
-      </g>
-      <g id="closedString1" style="visibility: hidden;">
-        <circle r="6"/>
-        <text fill="white" id="finger1" y="4" text-anchor="middle"></text>
-      </g>
-      <g id="closedString2" style="visibility: hidden;">
-        <circle r="6"/>
-        <text fill="white" id="finger2" y="4" text-anchor="middle"></text>
-      </g>
-      <g id="closedString3" style="visibility: hidden;">
-        <circle r="6"/>
-        <text fill="white" id="finger3" y="4" text-anchor="middle"></text>
-      </g>
-    </g>
-    <g id="openStrings" transform="translate(1,-6)">
-      <circle id="openString0" cx="0"  r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
-      <circle id="openString1" cx="20" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
-      <circle id="openString2" cx="40" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
-      <circle id="openString3" cx="60" r="4" fill="none" stroke="black" stroke-width="1" style="visibility: hidden;"/>
-    </g>
-    <g id="xedStrings" transform="translate(-3,-10)">
-      <path id="xString0" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1"/>
-      <path id="xString1" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1" transform="translate(20,0)"/>
-      <path id="xString2" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1" transform="translate(40,0)"/>
-      <path id="xString3" d="M0,0L8,8m0,-8L0,8" stroke="black" style="visibility: hidden;" stroke-width="1" transform="translate(60,0)"/>
-    </g>
-    <g id="subText" transform="translate(1,98)">
-      <text id="subText0" x="0" text-anchor="middle"></text>
-      <text id="subText1" x="20" text-anchor="middle"></text>
-      <text id="subText2" x="40" text-anchor="middle"></text>
-      <text id="subText3" x="60" text-anchor="middle"></text>
-    </g>
+    <g id="frets"></g>
+    <g id="strings"></g>
   </g>
 </svg>`;
-
-  const stringsNum = 4;
-
-  const _translate = function (x, y, el) {
+  const defaultFretCount = 4;
+  
+  function _translate(x, y, el) {
     el.setAttribute("transform", "translate(" + x + "," + y + ")");
+  }
+
+  function _node(name, attributes){
+    const node = document.createElementNS("http://www.w3.org/2000/svg", name);
+    Object.keys(attributes).forEach(key => {
+      node.setAttribute(key, attributes[key] + '' );
+    })
+    return node;
+  }
+
+  function _use(refName, attributes) {
+    const node = _node("use", attributes);
+    node.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#' + refName);
+    return node;
   }
 
   class UkeChord extends HTMLElement {
@@ -88,115 +56,127 @@
       elementsWithId.forEach(el => { this.$[el.id] = el; })
       this.shadowRoot.appendChild(template.content);
 
-      this.parseFrets();
-      this.parseFingers();
+      this.frets = this.frets ? this.frets.split("").slice(0,10) : [];
+      this.tabWidth = (this.frets.length - 1) * 20 + 2;
+      this.viewBoxWidth = this.tabWidth + 30;
+      this.fretCount = parseInt(this.length) || defaultFretCount;
+      this.tabHeight = this.fretCount * 20;
+      this.viewBoxHeight = this.tabHeight + 25 + (this.name ? 25 : 0)
+      this.fingers = this.fingers ? this.fingers.split("") : [];
+      this.sub = this.parseSub(this.sub)
+      this.r = this.r ? this.r.split("") : [];
+      
       this.showPosition();
-      this.parseSub();
       this.showName();
       this.setSize();
-      this.setRoot();
       this.setTitle();
+
+      this.render()
     }
 
-    parseFrets() {
-      if (!this.frets) return;
+    render() {
+      // add horizontal fret lines
+      for(let i=0; i< this.fretCount + 1; i++){
+        const fret = _node("rect", {x: 0,  y: i * 20, width: this.tabWidth, fill: 'black', height: 2 })
+        this.$["frets"].appendChild(fret)
+      }
 
-      const frets = this.frets.split("");
-      if (frets.length !== stringsNum) return;
+      // for each string add a vertical string, a bubble, open marker, x marker, or fingering
+      this.frets.forEach((fret, idx) => {
+        const x = idx * 20;
+        const string = _node("rect", {x,  y: 0, width: 2, fill: 'black', height: this.tabHeight })
+        this.$["strings"].appendChild(string)
 
-      frets.forEach((fret, idx) => {
+        // add diamond heads, strings on ukulele are counted from the right to the left, so 1 equals idx 3, 2=2, 3=1, 4=0
+        if(this.r.includes(this.frets.length - idx + '')){
+          const y = (parseInt(fret) - 1) * 20;
+          const diamond = _use('diamond', { x, y })
+          this.$["strings"].appendChild(diamond)
+        }
+        
         if (fret === "0") {
-          this.$["openString" + idx].style.visibility = "visible";
+          const circle = _use('openString', {x})
+          this.$["strings"].appendChild(circle)
         } else if(fret === "x" || fret === 'X'){
-          console.log('found an X')
-          this.$["xString" + idx].style.visibility = "visible";
-        } else {
-          this.$["closedString" + idx].style.visibility = "visible";
+          const ex = _use('ex', { x })
+          this.$["strings"].appendChild(ex)
+        } else if(parseInt(fret) > 0){
+          const y = (parseInt(fret) - 1) * 20;
+          const bubble = _use('bubble', { x, y })
+          this.$["strings"].appendChild(bubble)
+
+            // add finger numbers on top of the bubbles
+          if(this.fingers[idx]){
+            const text = _node("text", { x: x + 1, y: y + 15, fill: 'white', 'text-anchor': 'middle' })
+            text.innerHTML = this.fingers[idx] !== "0" ? this.fingers[idx] : '';
+            this.$["strings"].appendChild(text)
+          }
         }
 
-        if(parseInt(fret) > 0){
-          _translate(idx * 20, (fret - 1) * 20, this.$["closedString" + idx]);
+        // add the text under the tab
+        if(this.sub[idx]){
+          const y = this.tabHeight + 13;
+          const text = _node("text", { x, y, 'text-anchor': 'middle' })
+          text.innerHTML = this.sub[idx] !== "_" ? this.sub[idx] : '';
+          this.$["svgChord"].appendChild(text)
         }
       });
+
+      const tabX = (this.viewBoxWidth - this.tabWidth)/2
+      _translate(tabX, 12 + (this.name ? 25 : 0), this.$.svgChord);
     }
 
-    parseFingers() {
-      if (!this.fingers) return;
-
-      const fingers = this.fingers.split("");
-      if (fingers.length !== stringsNum) return;
-
-      fingers.forEach((finger, idx) => {
-        this.$["finger" + idx].innerHTML = finger !== "0" ? finger : "";
-      });
-    }
-
-
+    // show start position on the left side of the tab
     showPosition() {
       const position = parseInt(this.position);
       if (position === 0) {
-        this.$.nut.style.visibility = "visible";
+        const nut = _node("rect", {x: 0,  y: -1, width: this.tabWidth, fill: 'black', height: 4 })
+        this.$["frets"].appendChild(nut)
       } else if (position > 0 && position < 100) {
         this.$.position.innerHTML = position;
       }
     }
 
-    parseSub() {
+    parseSub(sub) {
       let subText;
-      if (!this.sub) return;
-
+      if (!sub) return [];
       //if using commas in the sub text as separators
-      if (this.sub.indexOf(",") > 0) {
+      if (sub.indexOf(",") > 0) {
         subText = this.sub.split(",");
       } else {
         subText = this.sub.split("");
       }
-      if (subText.length !== stringsNum) return;
-
-      subText.forEach((text, idx) => {
-        this.$["subText" + idx].innerHTML = text !== "_" ? text : "";
-      });
+      return subText || [];
     }
 
+    // show chord name above the tab
     showName() {
       if (this.name && this.name.length > 0) {
-        _translate(16, 28, this.$.svgChord);
+        // move tab down so that there's room for the text above
+        _translate(20, 35, this.$.svgChord);
         this.$.chordName.innerHTML = this.name;
-        this.$.ukeChordSvg.setAttribute("height", 134);
-        this.$.ukeChordSvg.setAttribute("viewBox", "0 0 84 134");
+        this.$.ukeChordSvg.setAttribute("height", this.viewBoxHeight);
+        this.$.ukeChordSvg.setAttribute("viewBox", `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`);
       }
     }
 
     setSize() {
-      if (!this.size) return;
+      let ratio = 1
+      
       if (this.size === "L" || this.size === "l") {
-        this.$.ukeChordSvg.setAttribute("width", 180);
-        if (this.name) {
-          this.$.ukeChordSvg.setAttribute("height", 268);
-        } else {
-          this.$.ukeChordSvg.setAttribute("height", 224);
-        }
+        ratio = 1.8
       }
-    }
+      else if(parseFloat(this.size) > 0){
+        ratio = this.size;
+      }
 
-    setRoot() {
-      if (!this.r) return;
-
-      this.r.split("").forEach(r => {
-        const root = parseInt(r);
-        if (root > stringsNum || root < 1) return;
-        const stringIdx = stringsNum - root;
-        const string = this.$["closedString" + stringIdx];
-        const circle = this.$["closedString" + stringIdx].getElementsByTagName("circle")[0];
-        const diamond = this.$.diamond.cloneNode(true);
-        diamond.style.visibility = "visible";
-        string.insertBefore(diamond, circle);
-        string.removeChild(circle);
-      });
+      this.$.ukeChordSvg.setAttribute("width", this.viewBoxWidth * ratio);
+      this.$.ukeChordSvg.setAttribute("height", this.viewBoxHeight * ratio);
+      this.$.ukeChordSvg.setAttribute("viewBox", `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`);
     }
 
     setTitle(){
-      this.$.title.innerHTML = this.name ? this.name : 'Ukulele chord';
+      this.$.title.innerHTML = this.name ? this.name : 'Tab chord';
     } 
   }
 

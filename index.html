@@ -20,20 +20,19 @@
   <section class="page-header">
     <h1 class="project-name">&lt;uke-chord&gt;</h1>
 
-    <h2 class="project-tagline">Small instrument. Big diagrams.</h2>
+    <h2 class="project-tagline">Easy chord diagrams. Not just ukulele.</h2>
     <a href="https://github.com/pianosnake/uke-chord" class="btn">View on GitHub</a>
     <a href="https://github.com/pianosnake/uke-chord/zipball/master" class="btn">Download .zip</a>
     <a href="https://github.com/pianosnake/uke-chord/tarball/master" class="btn">Download .tar.gz</a>
   </section>
 
   <section class="main-content">
-    <p><code>&lt;uke-chord&gt;</code> is a custom HTML element for a ukulele chord diagram using SVG graphics. It is
-      tuning agnostic and can be used for any 4 string fretted instrument including the mandolin, <a href="https://en.wikipedia.org/wiki/Tenor_guitar">tenor
-        guitar</a>, bass guitar, <a href="https://en.wikipedia.org/wiki/Appalachian_dulcimer">mountain dulcimer</a>, <a
-        href="https://en.wikipedia.org/wiki/Cuatro_(instrument)">cuatro</a> and <a href="https://en.wikipedia.org/wiki/Cavaquinho">cavaquinho</a>.</p>
+    <p><code>&lt;uke-chord&gt;</code> is a custom HTML element for tab chord diagrams using SVG graphics. It is
+      tuning agnostic and can be used for any fretted string instrument including the mandolin, 3 string dulcimer, ukulele, guitar, and 7 string guitar.
+      </p>
 
     <h2>Install</h2>
-    <p>Download this repo using the 'Download' button and load the two JS files into your page's HEAD tag. The webcomponents-lite.min.js file offers support for older browsers, so it is optional.
+    <p>Download this repo using the 'Download' button and load the two JS files into your page's HEAD tag. The <b>webcomponents-lite.min.js</b> file offers support for older browsers, so it is <b>optional</b>.
       The scripts can also be referenced directly from github:</p>
 
     <pre><code>&lt;script src="//pianosnake.github.io/uke-chord/webcomponents-lite.min.js"&gt;&lt;/script&gt;
@@ -41,37 +40,66 @@
 </code></pre>
 
     <h2>Use</h2>
+    Just add a <code>&lt;uke-chord&gt;</code> element wherever you need a diagram in your web page. Then set the following parameters:
+    <h3>frets</h3>
+    <p>Set the <code>frets</code> attribute to the numeric value of the frets that should be played, left to right. The number of frets determines
+      the width of the diagram. The limit is 10 strings. Pass an 'x' to indicate a string should not be played and '0' if it should remain open.</p>
 
-    <p>Create a chord diagram by inserting a <code>&lt;uke-chord&gt;</code> element in your HTML. Set the
-      <code>frets</code> attribute to the numeric value of the frets that should be played. For example, using a GCEA
-      tuned ukulele an F chord would have <code>frets</code>
-      set to <code>2010</code>. The diagram automatically places an open circle above any string marked with a <code>0</code>
-      indicating that the string should be played open.</p>
-
-    <pre><code>&lt;uke-chord frets=&quot;2010&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+    <pre><code>&lt;uke-chord frets=&quot;2010&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32010&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;320&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;4xx30xx&quot;&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="2010"></uke-chord>
-    
-    <p>Pass an 'x' to indicate a string should not be played.</p>
-    <pre><code>&lt;uke-chord frets=&quot;201x&quot;&gt;&lt;/uke-chord&gt;</code></pre>
-    <uke-chord frets="201x" position="0"></uke-chord>
+    <uke-chord frets="x32010"></uke-chord>
+    <uke-chord frets="320"></uke-chord>
+    <uke-chord frets="4xx30xx"></uke-chord>
+    <h3>fingers</h3>
+    <p>To add fingerings inside the bubbles use a <code>fingers</code> attribute. List these from left to right.</p>
+    <pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32000&quot; fingers=&quot;021&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord frets="1323" fingers="1324"></uke-chord>
+    <uke-chord frets="x32000" fingers="021"></uke-chord>
 
-    <p>To add fingerings inside the bubbles use a <code>fingers</code> attribute. Use the <code>position</code>
-      attribute to show a position indicator.</p>
-    <pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot; position=7&gt;&lt;/uke-chord&gt;</code></pre>
+    <h3>position</h3>
+    <p>Use the <code>position</code> attribute to show a position indicator. To show the nut set <code>position</code> to 0. Since this value is an integer they don't need to be in quotes.</p>
+    <pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot; position=7&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32010&quot; fingers=&quot;03201&quot; position=0&gt;&lt;/uke-chord&gt;</code></pre>
+
     <uke-chord frets="1323" fingers="1324" position=7></uke-chord>
+    <uke-chord frets="x32010" fingers="03201" position=0></uke-chord>
 
-    <p>To add a chord name above the diagram use a <code>name</code> attribute. To add text under each string, such
-      as fingerings or root position indicators use a <code>sub</code> attribute with underscores for blanks. If
-      using more than one letter per string use a comma as a separator. To show the nut set the <code>position</code>
-      attribute to 0.</p>
-    <pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; sub=&quot;__R_&quot; position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;</code></pre>
-    <uke-chord frets="2313" fingers="3214" sub="__R_" position=0 name="F7"></uke-chord>
+    <h3>name</h3>
+    <p>To add a chord name above the diagram use a <code>name</code> attribute. </p>
+    <pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;xx0232&quot; fingers=&quot;00132&quot; position=0 name=&quot;D&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord frets="2310" fingers="231"  position=0 name="F7"></uke-chord>
+    <uke-chord frets="xx0232" fingers="000132"  position=0 name="D"></uke-chord>
 
-    <p>Make the diagrams larger by passing a <code>size="L"</code> attribute. Show the root of the chord with a
-      diamond head by passing an <code>r</code> attribute set to the string where the root of the chord is found. For
-      example a root on the 3rd string would look like this: <code>r=2</code>. A root can be duplicated on two strings, so this parameter can contain several digits.</p>
-    <pre><code class="html">&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; name=&quot;F7&quot; position=0 size=&quot;L&quot; r=2 sub=&quot;3,&#9837;7,R,5&quot;&gt;&lt;/uke-chord&gt;</code></pre>
-    <uke-chord frets="2313" fingers="3214" position=0 name="F7" size="L" r=2 sub="3,♭7,R,5"></uke-chord>
+    <h3>sub</h3>
+    <p>To add text under each string, such
+      as string names or root position indicators use a <code>sub</code> attribute with underscores for blanks. If
+      using more than one letter per string use a comma as a separator.</p>
+      <pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; sub=&quot;__R_&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;320003&quot; fingers=&quot;210003&quot; sub=&quot;EADGBE&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;310&quot; fingers=&quot;21&quot; sub=&quot;D,A,A/D&quot; position=0&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord frets="2313" fingers="3214" sub="__R_" position=0 ></uke-chord>
+    <uke-chord frets="320003" fingers="210003" sub="EADGBE" position=0></uke-chord>
+    <uke-chord frets="310" fingers="21" sub="D,A,A/D" position=0></uke-chord>
+
+
+    <h3>length</h3>
+    <p>By default, there are only 4 frets shown. Set <code>length</code> to another number to show more frets.</p>
+    <pre><code>&lt;uke-chord frets=&quot;330013&quot; fingers=&quot;230014&quot; length=5 position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;666&quot; fingers=&quot;111&quot; length=7 position=0&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord frets="330013" fingers="230014" length=5 position=0 name="Gsus4"></uke-chord>
+    <uke-chord frets="666" fingers="111" length=7 position=0 name="F#"></uke-chord>
+
+    <h3>size</h3>
+    <p>Change the diagram size by passing a <code>size</code> attribute set to a number. Numbers greater than 1 will make the 
+      diagram bigger. Numbers smaller than 1 will make it smaller.</p>
+      <pre><code>&lt;uke-chord frets=&quot;2310&quot; fingers=&quot;231&quot; size=0.4 position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;2310&quot; fingers=&quot;231&quot; size=1 position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;2310&quot; fingers=&quot;231&quot; size=1.5 position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+
+      <uke-chord frets="2310" fingers="231" size=0.4 position=0 name="F7"></uke-chord>
+      <uke-chord frets="2310" fingers="231" size=1 position=0 name="F7"></uke-chord>
+      <uke-chord frets="2310" fingers="231" size=1.5 position=0 name="F7"></uke-chord>
+      
+      <h3>r</h3>
+      <p>Some publishers show the root of the chord with a
+      diamond head. To do this pass an <code>r</code> attribute set to the string where the root of the chord is found. 
+      A root can be duplicated on two strings, so this parameter can contain several digits. The strings are counted from right to left.</p>
+    <pre><code>&lt;uke-chord frets=&quot;5433&quot; length=5 fingers=&quot;3211&quot; name=&quot;C&quot; position=0 r=14&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord frets="5433" length=5 fingers="3211" position=0 name="C" r=14></uke-chord>
 
     <h2>In the wild</h2>
     <p>This component was built for a series of posts on ukulele playing</p>
