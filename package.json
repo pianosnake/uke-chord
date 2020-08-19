@@ -1,17 +1,19 @@
 {
   "name": "uke-chord",
-  "version": "1.1.0",
-  "description": "Web Component for ukulele chord diagrams",
+  "version": "1.1.1",
+  "description": "Web Component for tab chord diagrams",
   "main": "uke-chord.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pianosnake/uke-chord.git"
   },
   "keywords": [
+    "guitar",
     "ukulele",
     "chord",
     "diagram",
-    "web-components"
+    "custom element",
+    "web-component"
   ],
   "author": "Florin Alexandrescu",
   "license": "MIT",
