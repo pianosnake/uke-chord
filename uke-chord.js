@@ -1,10 +1,7 @@
 (function () {
 
   const svg = `
-<svg id="ukeChordSvg" width="90" height="112" viewBox="0 0 90 112"
-      style="font-family: sans-serif; font-size: 11px;"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="ukeChordSvg" width="90" height="112" viewBox="0 0 90 112" style="font-family: sans-serif; font-size: 11px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title id="title">uke-chord</title>
   <text id="chordName" x="50%" y="16"  text-anchor="middle" style="font-size: 16px;"></text>
   <defs>
@@ -13,14 +10,16 @@
     <circle id="openString" cx="0" r="4" fill="none" stroke="black" stroke-width="1" transform="translate(0,-7)"/>
     <rect id="diamond" width="14" height="14" transform="translate(1,2),rotate(45)"></rect>
   </defs>
-  <g id="svgChord">
-    <text id="position" x="-14" y="17" text-anchor="middle"></text>
+  <g id="tab">
+    <text id="position" x="-6" y="15" text-anchor="end"></text>
     <g id="frets"></g>
     <g id="strings"></g>
   </g>
 </svg>`;
   const defaultFretCount = 4;
-  
+  const maxFretCount = 20;
+  const maxStringCount = 10;
+
   function _translate(x, y, el) {
     el.setAttribute("transform", "translate(" + x + "," + y + ")");
   }
@@ -50,38 +49,61 @@
       const template = document.createElement("template");
       template.innerHTML = svg;
 
+      // add all svg elements with an id to this.$
       const elementsWithId = template.content.querySelectorAll('*[id]');
       this.$ = {};
-      // add all svg elements with an id to this.$
       elementsWithId.forEach(el => { this.$[el.id] = el; })
-      this.shadowRoot.appendChild(template.content);
-
-      this.frets = this.frets ? this.frets.split("").slice(0,10) : [];
-      this.tabWidth = (this.frets.length - 1) * 20 + 2;
-      this.viewBoxWidth = this.tabWidth + 30;
-      this.fretCount = parseInt(this.length) || defaultFretCount;
-      this.tabHeight = this.fretCount * 20;
-      this.viewBoxHeight = this.tabHeight + 25 + (this.name ? 25 : 0)
+      
+      // parameter parsing
+      if(this.frets){
+        this.frets = this.frets ? this.frets.split("").slice(0, maxStringCount) : [];
+      }else{
+        throw Error('frets attribute is required')
+      }
+      
       this.fingers = this.fingers ? this.fingers.split("") : [];
       this.sub = this.parseSub(this.sub)
+      this.size = this.parseSize(this.size)
       this.r = this.r ? this.r.split("") : [];
-      
-      this.showPosition();
-      this.showName();
-      this.setSize();
-      this.setTitle();
+      this.position = parseInt(this.position) || null;
+      this.name = (this.name && this.name.length > 0) ? this.name : null
+      this.fretCount = this.parseLength(this.length)
+      console.log('this', )
 
+      // computed properties
+      this.tabWidth = (this.frets.length - 1) * 20 + 2;
+      this.viewBoxWidth = this.tabWidth + 30 + (this.position ? 6 : 0);
+      this.tabHeight = this.fretCount * 20;
+      this.viewBoxHeight = this.tabHeight + 25 + (this.name ? 25 : 0);
+      this.tabX = (this.viewBoxWidth - this.tabWidth)/2;
+      this.tabY = 12 + (this.name ? 20 : 0);
+      
       this.render()
+
+      if(this.hasAttribute('img')){
+        // create an image that can be saved by the user and possibly indexed by search engines
+        const img= document.createElement("img");
+        img.alt = (this.name ? `${this.name} ` : '' ) + 'chord'
+        img.title = img.alt
+        img.src = `data:image/svg+xml;utf8,${encodeURIComponent(template.innerHTML.replace(/\s*(\r\n|\n|\r)\s*/gm,""))}`
+        this.shadowRoot.appendChild(img)
+      }else{
+        // append the SVG inline by appending the template content
+        this.shadowRoot.appendChild(template.content);
+      }
     }
 
     render() {
+      this.showPosition();
+      this.showName();
+
       // add horizontal fret lines
       for(let i=0; i< this.fretCount + 1; i++){
         const fret = _node("rect", {x: 0,  y: i * 20, width: this.tabWidth, fill: 'black', height: 2 })
         this.$["frets"].appendChild(fret)
       }
 
-      // for each string add a vertical string, a bubble, open marker, x marker, or fingering
+      // add vertical strings, and for each string a bubble, an open circle marker, an x marker, and a fingering
       this.frets.forEach((fret, idx) => {
         const x = idx * 20;
         const string = _node("rect", {x,  y: 0, width: 2, fill: 'black', height: this.tabHeight })
@@ -113,28 +135,37 @@
           }
         }
 
-        // add the text under the tab
+        // add the text under each string
         if(this.sub[idx]){
           const y = this.tabHeight + 13;
           const text = _node("text", { x, y, 'text-anchor': 'middle' })
           text.innerHTML = this.sub[idx] !== "_" ? this.sub[idx] : '';
-          this.$["svgChord"].appendChild(text)
+          this.$["tab"].appendChild(text)
         }
       });
 
-      const tabX = (this.viewBoxWidth - this.tabWidth)/2
-      _translate(tabX, 12 + (this.name ? 25 : 0), this.$.svgChord);
+      _translate(this.tabX, this.tabY, this.$.tab);
+      this.$.ukeChordSvg.setAttribute("width", this.viewBoxWidth * this.size);
+      this.$.ukeChordSvg.setAttribute("height", this.viewBoxHeight * this.size);
+      this.$.ukeChordSvg.setAttribute("viewBox", `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`);
     }
 
     // show start position on the left side of the tab
     showPosition() {
-      const position = parseInt(this.position);
-      if (position === 0) {
+      const p = this.position;
+      if (p === 0) {
+        // draw a thick bar at the top representing the nut
         const nut = _node("rect", {x: 0,  y: -1, width: this.tabWidth, fill: 'black', height: 4 })
         this.$["frets"].appendChild(nut)
-      } else if (position > 0 && position < 100) {
-        this.$.position.innerHTML = position;
+      } else if (p > 0 && p < 100) {
+        this.$.position.innerHTML = p;
       }
+    }
+
+    // show chord name above the tab
+    showName() {
+      if(this.name) this.$.chordName.innerHTML = this.name;
+      this.$.title.innerHTML = this.name || 'Tab';
     }
 
     parseSub(sub) {
@@ -149,35 +180,21 @@
       return subText || [];
     }
 
-    // show chord name above the tab
-    showName() {
-      if (this.name && this.name.length > 0) {
-        // move tab down so that there's room for the text above
-        _translate(20, 35, this.$.svgChord);
-        this.$.chordName.innerHTML = this.name;
-        this.$.ukeChordSvg.setAttribute("height", this.viewBoxHeight);
-        this.$.ukeChordSvg.setAttribute("viewBox", `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`);
-      }
-    }
-
-    setSize() {
+    parseSize(size) {
       let ratio = 1
-      
-      if (this.size === "L" || this.size === "l") {
+      if (size === "L" || size === "l") {
         ratio = 1.8
+      } else if(parseFloat(size) > 0){
+        ratio = size;
       }
-      else if(parseFloat(this.size) > 0){
-        ratio = this.size;
-      }
-
-      this.$.ukeChordSvg.setAttribute("width", this.viewBoxWidth * ratio);
-      this.$.ukeChordSvg.setAttribute("height", this.viewBoxHeight * ratio);
-      this.$.ukeChordSvg.setAttribute("viewBox", `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`);
+      return ratio
     }
 
-    setTitle(){
-      this.$.title.innerHTML = this.name ? this.name : 'Tab chord';
-    } 
+    parseLength(length){
+      let len = parseInt(length)
+      if(!len || len > maxFretCount) len = defaultFretCount;
+      return len;
+    }
   }
 
   customElements.define('uke-chord', UkeChord);

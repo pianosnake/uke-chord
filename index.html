@@ -42,43 +42,44 @@
     <h2>Use</h2>
     Just add a <code>&lt;uke-chord&gt;</code> element wherever you need a diagram in your web page. Then set the following parameters:
     <h3>frets</h3>
-    <p>Set the <code>frets</code> attribute to the numeric value of the frets that should be played, left to right. The number of frets determines
-      the width of the diagram. The limit is 10 strings. Pass an 'x' to indicate a string should not be played and '0' if it should remain open.</p>
+    <p>This attribute is <b>required</b>. Set the <code>frets</code> attribute to the numeric value of the frets that should be played, left to right. The number of frets determines
+      the width of the diagram. The limit is 10 strings. Pass an 'x' to indicate a string should not be played and '0' if it should remain open. Make sure to 
+    use <b>quotes</b> around this value.</p>
 
     <pre><code>&lt;uke-chord frets=&quot;2010&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32010&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;320&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;4xx30xx&quot;&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="2010"></uke-chord>
     <uke-chord frets="x32010"></uke-chord>
     <uke-chord frets="320"></uke-chord>
     <uke-chord frets="4xx30xx"></uke-chord>
+
     <h3>fingers</h3>
     <p>To add fingerings inside the bubbles use a <code>fingers</code> attribute. List these from left to right.</p>
     <pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32000&quot; fingers=&quot;021&quot;&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="1323" fingers="1324"></uke-chord>
     <uke-chord frets="x32000" fingers="021"></uke-chord>
 
-    <h3>position</h3>
-    <p>Use the <code>position</code> attribute to show a position indicator. To show the nut set <code>position</code> to 0. Since this value is an integer they don't need to be in quotes.</p>
-    <pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot; position=7&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32010&quot; fingers=&quot;03201&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;222&quot; fingers=&quot;111&quot; position=12&gt;&lt;/uke-chord&gt;</code></pre>
-
-    <uke-chord frets="1323" fingers="1324" position=7></uke-chord>
-    <uke-chord frets="x32010" fingers="03201" position=0></uke-chord>
-    <uke-chord frets="222" fingers="111" position=12></uke-chord>
-    
     <h3>name</h3>
     <p>To add a chord name above the diagram use a <code>name</code> attribute. </p>
     <pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;xx0232&quot; fingers=&quot;00132&quot; position=0 name=&quot;D&quot;&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="2310" fingers="231"  position=0 name="F7"></uke-chord>
     <uke-chord frets="xx0232" fingers="000132"  position=0 name="D"></uke-chord>
 
+    <h3>position</h3>
+    <p>Use the <code>position</code> attribute to show a position indicator to the left of the diagram. To show the nut set <code>position</code> to 0. Since this value is an integer it doesn't need to be in quotes.</p>
+    <pre><code>&lt;uke-chord frets=&quot;1323&quot; fingers=&quot;1324&quot; position=7&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32010&quot; fingers=&quot;03201&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;222&quot; fingers=&quot;111&quot; position=12&gt;&lt;/uke-chord&gt;</code></pre>
+
+    <uke-chord frets="1323" fingers="1324" position=7></uke-chord>
+    <uke-chord frets="x32010" fingers="03201" position=0></uke-chord>
+    <uke-chord frets="222" fingers="111" position=12></uke-chord>
+    
     <h3>sub</h3>
-    <p>To add text under each string, such
-      as string names or root position indicators use a <code>sub</code> attribute with underscores for blanks. If
-      using more than one letter per string use a comma as a separator.</p>
-      <pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; sub=&quot;__R_&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;320003&quot; fingers=&quot;210003&quot; sub=&quot;EADGBE&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;310&quot; fingers=&quot;21&quot; sub=&quot;D,A,A/D&quot; position=0&gt;&lt;/uke-chord&gt;</code></pre>
+    <p>To add text under each string use a <code>sub</code> attribute with underscores for blanks. If
+      using more than one letter per string use a comma to separate the values.</p>
+      <pre><code>&lt;uke-chord frets=&quot;2313&quot; fingers=&quot;3214&quot; sub=&quot;__R_&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;320003&quot; fingers=&quot;210003&quot; sub=&quot;EADGBE&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;310&quot; fingers=&quot;21&quot; sub=&quot;D,A,A/D&quot; position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;4222&quot; sub=&quot;R,♭3,5,R&quot;&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="2313" fingers="3214" sub="__R_" position=0 ></uke-chord>
     <uke-chord frets="320003" fingers="210003" sub="EADGBE" position=0></uke-chord>
     <uke-chord frets="310" fingers="21" sub="D,A,A/D" position=0></uke-chord>
-
+    <uke-chord frets="4222" sub="R,♭3,5,R"></uke-chord>
 
     <h3>length</h3>
     <p>By default, there are only 4 frets shown. Set <code>length</code> to another number to show more frets.</p>
@@ -102,96 +103,124 @@
     <pre><code>&lt;uke-chord frets=&quot;5433&quot; length=5 fingers=&quot;3211&quot; name=&quot;C&quot; position=0 r=14&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="5433" length=5 fingers="3211" position=0 name="C" r=14></uke-chord>
 
+    <h3>img</h3>
+    <p>To allow styling with CSS, the SVG output is inlined by default. To get the SVG inside an image, set an <code>img</code> attribute. This allows right clicking on an image and saving it, or in some browsers, dragging the image from the browser.</p>
+    <pre><code>&lt;uke-chord img frets=&quot;2310&quot; fingers=&quot;231&quot; position=0&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord img frets="2310" fingers="231" position=0 img></uke-chord>
+    
     <h2>In the wild</h2>
-    <p>This component was built for a series of posts on ukulele playing</p>
+    <p>This component was originally built for a series of posts on ukulele playing, hence the name.</p>
+    <script>
+      if(window.location.href === 'https://github.com/pianosnake/uke-chord'){
+        document.write(`
+          <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>      
     <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>
-
+          <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>      
+    <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>
+          <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>      
+    <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>
+          <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>      
+    <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>
+          <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>      
+        `)
+      }
+    </script>
+    
     <h2>More examples</h2>
-    <h3>Progressions</h3>
-    <uke-chord frets="3323" r=1 name="iiø" fingers="2314"></uke-chord>
-    <uke-chord frets="2313" r=2 name="V7" fingers="2314"></uke-chord>
-    <uke-chord frets="3111" r=1 name="i" fingers="4111"></uke-chord>
-    <uke-chord frets="3211" r=14 name="I" fingers="3211" sub="R__R"></uke-chord>
+    <h3>Guitar chords with root on 6th string</h3>
+    <uke-chord img frets="133211" r=146 name="Major" sub="R5R35R" fingers="134211"></uke-chord>
+    <uke-chord img frets="133111" r=146 name="Minor" sub="R,5,R,m3,5,R" fingers="134111"></uke-chord>
+    <uke-chord img frets="131211" r=16 name="Dom 7" sub="R,5,m7,3,5,R" fingers="131211"></uke-chord>
+    <uke-chord img frets="131111" r=16 name="Minor 7" sub="R,5,m7,m3,5,R" fingers="131111"></uke-chord>
+    <uke-chord img frets="132211" r=16 name="Major 7" sub="R,5,M7,3,5,R" fingers="143211"></uke-chord>
+
+    <h3>Guitar chords with root on 5th string</h3>
+    <uke-chord img frets="x13331" r=35 name="Major" sub="_R5R35" fingers="013331"></uke-chord>
+    <uke-chord img frets="x13321" r=35 name="Minor" sub="_,R,5,R,m3,5" fingers="013421"></uke-chord>
+    <uke-chord img frets="x13131" r=5 name="Dom 7" sub="_,R,5,m7,3,5" fingers="013141"></uke-chord>
+    <uke-chord img frets="x13121" r=5 name="Minor 7" sub="_,R,5,m7,m3,5" fingers="013121"></uke-chord>
+    <uke-chord img frets="x13231" r=5 name="Major 7" sub="_,R,5,M7,3,5" fingers="013241"></uke-chord>
+
+    <h3>Ukulele major chords</h3>
+    <uke-chord img frets="4322" sub="R35R" r=14></uke-chord>
+    <uke-chord img frets="4442" sub="5R35" r=3></uke-chord>
+    <uke-chord img frets="1114" sub="5R3R" r=13></uke-chord>
+    <uke-chord img frets="1343" sub="R5R3" r=24></uke-chord>
+    <uke-chord img frets="4232" sub="35R3" r=2></uke-chord>
     
-    <br>
+    <h3>Ukulele minor chords</h3>
+    <uke-chord img frets="4222" sub="R,♭3,5,R" r=14></uke-chord>
+    <uke-chord img frets="1444" sub="5,♭3,5,R" r=1></uke-chord>
+    <uke-chord img frets="4432" sub="5,R,♭3,5" r=3></uke-chord>
+    <uke-chord img frets="1342" sub="R,5,R,♭3" r=24></uke-chord>
+    <uke-chord img frets="4342" sub="♭3,5,R,♭3" r=2></uke-chord>
     
-    <uke-chord frets="2423" r=2 fingers="1423"></uke-chord>
-    <uke-chord frets="2322" r=1 fingers="1311"></uke-chord>
-    <uke-chord frets="4432" r=3 fingers="4321"></uke-chord>
-    <uke-chord frets="4442" r=3 fingers="3331"></uke-chord>
+    <h3>Ukulele dominant 7th chords</h3>
+    <uke-chord img frets="3433" sub="735R" r=1></uke-chord>
+    <uke-chord img frets="3334" sub="5R37" r=3></uke-chord>
+    <uke-chord img frets="2434" sub="R573" r=4></uke-chord>
+    <uke-chord img frets="3424" sub="37R5" r=2></uke-chord>
+    <uke-chord img frets="3241" sub="R37R" r=14></uke-chord>
+    <uke-chord img frets="4242" sub="5735"></uke-chord>
     
-    <br>
+    <h3>Ukulele minor 7th chords</h3>
+    <uke-chord img frets="3141" sub="R37R" r=14></uke-chord>
+    <uke-chord img frets="3333" sub="735R" r=1></uke-chord>
+    <uke-chord img frets="3324" sub="5R37" r=3></uke-chord>
+    <uke-chord img frets="2433" sub="R573" r=4></uke-chord>
+    <uke-chord img frets="2424" sub="37R5" r=2></uke-chord>
     
-    <uke-chord frets="2333" r=4 fingers="1333"></uke-chord>
-    <uke-chord frets="2223" r=3 fingers="1113"></uke-chord>
-    <uke-chord frets="3231" r=2 fingers="4231"></uke-chord>
-    <uke-chord frets="4232" r=2 fingers="4131" ></uke-chord>
-    
-    <br>
-    
-    <uke-chord frets="2324" r=3 fingers="1324"></uke-chord>
-    <uke-chord frets="1323" r=4 fingers="1324"></uke-chord>
-    <uke-chord frets="1444" r=1 fingers="1444"></uke-chord>
-    <uke-chord frets="1114" r=13 fingers="1114" sub="_R_R"></uke-chord>
-    
-    <h3>Major chords</h3>
-    <uke-chord frets="4322" sub="R35R" r=14></uke-chord>
-    <uke-chord frets="4442" sub="5R35" r=3></uke-chord>
-    <uke-chord frets="1114" sub="5R3R" r=13></uke-chord>
-    <uke-chord frets="1343" sub="R5R3" r=24></uke-chord>
-    <uke-chord frets="4232" sub="35R3" r=2></uke-chord>
-    
-    <h3>Minor chords</h3>
-    <uke-chord frets="4222" sub="R,♭3,5,R" r=14></uke-chord>
-    <uke-chord frets="1444" sub="5,♭3,5,R" r=1></uke-chord>
-    <uke-chord frets="4432" sub="5,R,♭3,5" r=3></uke-chord>
-    <uke-chord frets="1342" sub="R,5,R,♭3" r=24></uke-chord>
-    <uke-chord frets="4342" sub="♭3,5,R,♭3" r=2></uke-chord>
-    
-    <h3>Dominant 7th chords</h3>
-    <uke-chord frets="3433" sub="735R" r=1></uke-chord>
-    <uke-chord frets="3334" sub="5R37" r=3></uke-chord>
-    <uke-chord frets="2434" sub="R573" r=4></uke-chord>
-    <uke-chord frets="3424" sub="37R5" r=2></uke-chord>
-    <uke-chord frets="3241" sub="R37R" r=14></uke-chord>
-    <uke-chord frets="4242" sub="5735"></uke-chord>
-    
-    <h3>Minor 7th chords</h3>
-    <uke-chord frets="3141" sub="R37R" r=14></uke-chord>
-    <uke-chord frets="3333" sub="735R" r=1></uke-chord>
-    <uke-chord frets="3324" sub="5R37" r=3></uke-chord>
-    <uke-chord frets="2433" sub="R573" r=4></uke-chord>
-    <uke-chord frets="2424" sub="37R5" r=2></uke-chord>
-    
-    <h3>Major 7th chords</h3>
+    <h3>Ukulele major 7th chords</h3>
     <uke-chord frets="4321" sub="R357" r=4></uke-chord>
     <uke-chord frets="4342" sub="5735"></uke-chord>
     <uke-chord frets="2224" sub="5R37" r=3></uke-chord>
     <uke-chord frets="2444" sub="R573" r=4></uke-chord>
     <uke-chord frets="3322" sub="735R" r=1></uke-chord>
     
-    <h3>Dominant 9th chords</h3>
+    <h3>Ukulele dominant 9th chords</h3>
     <uke-chord frets="3243" sub="R372" r=4></uke-chord>
     <uke-chord frets="2423" sub="5237"></uke-chord>
     <uke-chord frets="2333" sub="3725"></uke-chord>
     <uke-chord frets="2324" sub="7352"></uke-chord>
     
-    <h3>6th chords</h3>
+    <h3>Ukulele major 6th chords</h3>
     <uke-chord frets="4342" sub="R36R" r=14></uke-chord>
     <uke-chord frets="2433" sub="635R" r=1></uke-chord>
     <uke-chord frets="3333" sub="5R36" r=3></uke-chord>
     <uke-chord frets="2424" sub="R563" r=4></uke-chord>
     
-    <h3>Minor 6th</h3>
+    <h3>Ukulele minor 6th chords</h3>
     <uke-chord frets="4242" sub="R36R" r=14></uke-chord>
     <uke-chord frets="2423" sub="R563" r=4></uke-chord>
     <uke-chord frets="3323" sub="5R36" r=3></uke-chord>
     <uke-chord frets="2333" sub="635R" r=1></uke-chord>
     
-    <h3>Augmented</h3>
+    <h3>Ukulele augmented chord</h3>
     <uke-chord frets="3221"></uke-chord>
 
+    <h3>Ukulele iiø V i progressions</h3>
+    <uke-chord frets="3323" r=1 name="iiø" fingers="2314"></uke-chord>
+    <uke-chord frets="2313" r=2 name="V7" fingers="2314"></uke-chord>
+    <uke-chord frets="3111" r=14 name="i" fingers="4111"></uke-chord>
     
+    <br>
+    
+    <uke-chord frets="2423" r=2 fingers="1423"></uke-chord>
+    <uke-chord frets="2322" r=1 fingers="1311"></uke-chord>
+    <uke-chord frets="4432" r=3 fingers="4321"></uke-chord>
+    
+    <br>
+    
+    <uke-chord frets="2333" r=4 fingers="1333"></uke-chord>
+    <uke-chord frets="2223" r=3 fingers="1113"></uke-chord>
+    <uke-chord frets="3231" r=2 fingers="4231"></uke-chord>
+    
+    <br>
+    
+    <uke-chord frets="2324" r=3 fingers="1324"></uke-chord>
+    <uke-chord frets="1323" r=4 fingers="1324"></uke-chord>
+    <uke-chord frets="1444" r=1 fingers="1444"></uke-chord>
+
     <footer class="site-footer">
       <span class="site-footer-owner"><a href="https://github.com/pianosnake/uke-chord">&lt;uke-chord&gt;</a> is
         maintained by <a href="https://github.com/pianosnake">pianosnake</a>.</span>
