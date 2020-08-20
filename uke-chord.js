@@ -68,7 +68,6 @@
       this.position = parseInt(this.position) || null;
       this.name = (this.name && this.name.length > 0) ? this.name : null
       this.fretCount = this.parseLength(this.length)
-      console.log('this', )
 
       // computed properties
       this.tabWidth = (this.frets.length - 1) * 20 + 2;
