@@ -11,9 +11,21 @@
   <link rel="stylesheet" type="text/css" href="https://jasonlong.github.io/cayman-theme/css/github-light.css" media="screen">
 
   <script src="webcomponents-lite.min.js"></script>
-  <script src="uke-chord.js"></script>
-  <script src="//pianosnake.github.io/blogger-list/blogger-list.js"></script>
 
+  <script>
+    function addScript(src){
+      const js = document.createElement("script");
+      js.src = src;
+      document.head.appendChild(js)
+    }
+
+    if(window.location.href.includes('.github.io')){
+      addScript("//pianosnake.github.io/blogger-list/blogger-list.js");
+      addScript("uke-chord.min.js");
+    }else{
+      addScript("uke-chord.js");
+    }
+  </script>
 </head>
 
 <body>
@@ -32,15 +44,15 @@
       </p>
 
     <h2>Install</h2>
-    <p>Download this repo using the 'Download' button and load the two JS files into your page's HEAD tag. The <b>webcomponents-lite.min.js</b> file offers support for older browsers, so it is <b>optional</b>.
+    <p>Download this repo using the 'Download' button and load <b>uke-chord.js</b> (unminified version) or <b>uke-chord.min.js</b> (minified) into your page's HEAD tag. The <b>webcomponents-lite.min.js</b> file offers support for older browsers, so it is <b>optional</b>.
       The scripts can also be referenced directly from github:</p>
 
     <pre><code>&lt;script src="//pianosnake.github.io/uke-chord/webcomponents-lite.min.js"&gt;&lt;/script&gt;
-&lt;script src="//pianosnake.github.io/uke-chord/uke-chord.js"&gt;&lt;/script&gt;
+&lt;script src="//pianosnake.github.io/uke-chord/uke-chord.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
     <h2>Use</h2>
-    Just add a <code>&lt;uke-chord&gt;</code> element wherever you need a diagram in your web page. Then set the following parameters:
+    Add a <code>&lt;uke-chord&gt;</code> element wherever you need a chord diagram in your web page. Then set the following parameters:
     <h3>frets</h3>
     <p>This attribute is <b>required</b>. Set the <code>frets</code> attribute to the numeric value of the frets that should be played, left to right. The number of frets determines
       the width of the diagram. The limit is 10 strings. Pass an 'x' to indicate a string should not be played and '0' if it should remain open. Make sure to 
@@ -82,10 +94,10 @@
     <uke-chord frets="4222" sub="R,♭3,5,R"></uke-chord>
 
     <h3>length</h3>
-    <p>By default, there are only 4 frets shown. Set <code>length</code> to another number to show more frets.</p>
-    <pre><code>&lt;uke-chord frets=&quot;330013&quot; fingers=&quot;230014&quot; length=8 position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;666&quot; fingers=&quot;111&quot; length=7 position=0&gt;&lt;/uke-chord&gt;</code></pre>
+    <p>By default, there are only 4 frets shown. Set <code>length</code> to another number to show more or less frets.</p>
+    <pre><code>&lt;uke-chord frets=&quot;330013&quot; fingers=&quot;230014&quot; length=8 position=0&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;222&quot; fingers=&quot;111&quot; length=3 position=0&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord frets="330013" fingers="230014" length=8 position=0 name="Gsus4"></uke-chord>
-    <uke-chord frets="666" fingers="111" length=7 position=0 name="F#"></uke-chord>
+    <uke-chord frets="222" fingers="111" length=3 position=0 name="F#"></uke-chord>
 
     <h3>size</h3>
     <p>Change the diagram size by passing a <code>size</code> attribute set to a number. Numbers greater than 1 will make the 
@@ -111,7 +123,7 @@
     <h2>In the wild</h2>
     <p>This component was originally built for a series of posts on ukulele playing, hence the name.</p>
     <script>
-      if(window.location.href.indexOf('https://pianosnake.github.io/uke-chord') === 0){
+      if(customElements.get('blogger-list')){
         document.write(`
           <blogger-list labels="ukulele" blog-id="6321600142310040063" asc api-key="AIzaSyDmDP-qIOWHi7slq3DXr7Swpe55KjmHCQQ"></blogger-list>      
         `)

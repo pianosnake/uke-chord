@@ -1,5 +1,4 @@
 (function () {
-
   const svg = `
 <svg id="ukeChordSvg" width="90" height="112" viewBox="0 0 90 112" style="font-family: sans-serif; font-size: 11px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title id="title">uke-chord</title>
@@ -7,7 +6,7 @@
   <defs>
     <circle id="bubble" r="6" transform="translate(1,11)"/>
     <path id="ex" d="M0,0L8,8m0,-8L0,8" stroke="black" stroke-width="1.1" transform="translate(-3,-11)"/>
-    <circle id="openString" cx="0" r="4" fill="none" stroke="black" stroke-width="1" transform="translate(0,-7)"/>
+    <circle id="openString" r="4" fill="none" stroke="black" stroke-width="1" transform="translate(1,-7)"/>
     <rect id="diamond" width="14" height="14" transform="translate(1,2),rotate(45)"></rect>
   </defs>
   <g id="tab">

@@ -1,6 +1,6 @@
 {
   "name": "uke-chord",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Web Component for tab chord diagrams",
   "main": "uke-chord.js",
   "repository": {
@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/pianosnake/uke-chord/issues"
   },
-  "homepage": "http://pianosnake.github.io/uke-chord/"
+  "homepage": "http://pianosnake.github.io/uke-chord/",
+  "scripts": {
+    "server": "python -m SimpleHTTPServer",
+    "build": "npx esbuild --minify --outfile=uke-chord.min.js uke-chord.js"
+  },
+  "dependencies": {}
 }
