@@ -1,16 +1,20 @@
 (function () {
+  const fillColor = 'var(--uke-fill, black)';
+  const fingerTextColor = 'var(--uke-fingertext, white)';
+  const textColor = 'var(--uke-text, black)';
+
   const svg = `
 <svg id="ukeChordSvg" width="90" height="112" viewBox="0 0 90 112" style="font-family: sans-serif; font-size: 11px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title id="title">uke-chord</title>
-  <text id="chordName" x="50%" y="16"  text-anchor="middle" style="font-size: 16px;"></text>
+  <text id="chordName" x="50%" y="16"  text-anchor="middle" style="font-size: 16px;" fill="${textColor}"></text>
   <defs>
-    <circle id="bubble" r="6" transform="translate(1,11)"/>
-    <path id="ex" d="M0,0L8,8m0,-8L0,8" stroke="black" stroke-width="1.1" transform="translate(-3,-11)"/>
-    <circle id="openString" r="4" fill="none" stroke="black" stroke-width="1" transform="translate(1,-7)"/>
-    <rect id="diamond" width="14" height="14" transform="translate(1,2),rotate(45)"></rect>
+    <circle id="bubble" r="6" transform="translate(1,11)" fill="${fillColor}"/>
+    <path id="ex" d="M0,0L8,8m0,-8L0,8" stroke="${fillColor}" stroke-width="1.1" transform="translate(-3,-11)"/>
+    <circle id="openString" r="4" fill="none" stroke="${fillColor}" stroke-width="1" transform="translate(1,-7)"/>
+    <rect id="diamond" width="14" height="14" transform="translate(1,2),rotate(45)" fill="${fillColor}"></rect>
   </defs>
   <g id="tab">
-    <text id="position" x="-6" y="15" text-anchor="end"></text>
+    <text id="position" x="-6" y="15" text-anchor="end" fill="${textColor}"></text>
     <g id="frets"></g>
     <g id="strings"></g>
   </g>
@@ -103,14 +107,14 @@
 
       // add horizontal fret lines
       for(let i=0; i< this.fretCount + 1; i++){
-        const fret = _node("rect", {x: 0,  y: i * 20, width: this.tabWidth, fill: 'black', height: 2 })
+        const fret = _node("rect", {x: 0,  y: i * 20, width: this.tabWidth, fill: fillColor, height: 2 })
         this.$["frets"].appendChild(fret)
       }
 
       // add vertical strings, and for each string a bubble, an open circle marker, an x marker, and a fingering
       this.frets.forEach((fret, idx) => {
         const x = idx * 20;
-        const string = _node("rect", {x,  y: 0, width: 2, fill: 'black', height: this.tabHeight })
+        const string = _node("rect", {x,  y: 0, width: 2, fill: fillColor, height: this.tabHeight })
         this.$["strings"].appendChild(string)
 
         // add diamond heads, strings on ukulele are counted from the right to the left, so 1 equals idx 3, 2=2, 3=1, 4=0
@@ -135,7 +139,7 @@
 
           // add finger numbers on top of the bubbles
           if(this.fingers[idx]){
-            const text = _node("text", { x: x + 1, y: y + 15, fill: 'white', 'text-anchor': 'middle' })
+            const text = _node("text", { x: x + 1, y: y + 15, fill: fingerTextColor, 'text-anchor': 'middle' })
             text.innerHTML = this.fingers[idx] !== "0" ? this.fingers[idx] : '';
             this.$["strings"].appendChild(text)
           }
@@ -144,7 +148,7 @@
         // add the text under each string
         if(this.sub[idx]){
           const y = this.tabHeight + 13;
-          const text = _node("text", { x, y, 'text-anchor': 'middle' })
+          const text = _node("text", { x, y, 'text-anchor': 'middle', fill: textColor })
           text.innerHTML = this.sub[idx] !== "_" ? this.sub[idx] : '';
           this.$["tab"].appendChild(text)
         }
@@ -154,7 +158,7 @@
         const x = segment.start * 20 - 5;
         const width = (segment.end - segment.start) * 20 + 12;
         const y = (segment.fret - 1) * 20 + 5;
-        const barre = _node("rect", { x, y, width, height: 12, fill: 'black', rx: 6, ry: 6 });
+        const barre = _node("rect", { x, y, width, height: 12, fill: fillColor, rx: 6, ry: 6 });
         const firstChild = this.$["strings"].firstChild;
         if(firstChild){
           this.$["strings"].insertBefore(barre, firstChild);
@@ -174,7 +178,7 @@
       const p = this.position;
       if (p === 0) {
         // draw a thick bar at the top representing the nut
-        const nut = _node("rect", {x: 0,  y: -1, width: this.tabWidth, fill: 'black', height: 4 })
+        const nut = _node("rect", {x: 0,  y: -1, width: this.tabWidth, fill: fillColor, height: 4 })
         this.$["frets"].appendChild(nut)
       } else if (p > 0 && p < 100) {
         this.$.position.innerHTML = p;
