@@ -64,7 +64,11 @@
       this.sub = this.parseSub(this.sub)
       this.size = this.parseSize(this.size)
       this.r = this.r ? this.r.split("") : [];
-      this.position = parseInt(this.position) || null;
+      this.barre = this.barre ? this.barre.split("").slice(0, maxStringCount) : [];
+      this.barre = this.barre.slice(0, this.frets.length);
+      this.barreSegments = this.parseBarre(this.barre);
+      const parsedPosition = parseInt(this.position, 10);
+      this.position = Number.isNaN(parsedPosition) ? null : parsedPosition;
       this.name = (this.name && this.name.length > 0) ? this.name : null
       this.fretCount = this.parseLength(this.length)
 
@@ -95,6 +99,8 @@
       this.showPosition();
       this.showName();
 
+      const barreSegments = this.barreSegments || [];
+
       // add horizontal fret lines
       for(let i=0; i< this.fretCount + 1; i++){
         const fret = _node("rect", {x: 0,  y: i * 20, width: this.tabWidth, fill: 'black', height: 2 })
@@ -120,12 +126,14 @@
         } else if(fret === "x" || fret === 'X'){
           const ex = _use('ex', { x })
           this.$["strings"].appendChild(ex)
-        } else if(parseInt(fret) > 0){
-          const y = (parseInt(fret) - 1) * 20;
+        } else {
+          const fretNumber = parseInt(fret, 10);
+          if(!(fretNumber > 0)) return;
+          const y = (fretNumber - 1) * 20;
           const bubble = _use('bubble', { x, y })
           this.$["strings"].appendChild(bubble)
 
-            // add finger numbers on top of the bubbles
+          // add finger numbers on top of the bubbles
           if(this.fingers[idx]){
             const text = _node("text", { x: x + 1, y: y + 15, fill: 'white', 'text-anchor': 'middle' })
             text.innerHTML = this.fingers[idx] !== "0" ? this.fingers[idx] : '';
@@ -139,6 +147,19 @@
           const text = _node("text", { x, y, 'text-anchor': 'middle' })
           text.innerHTML = this.sub[idx] !== "_" ? this.sub[idx] : '';
           this.$["tab"].appendChild(text)
+        }
+      });
+
+      barreSegments.forEach(segment => {
+        const x = segment.start * 20 - 5;
+        const width = (segment.end - segment.start) * 20 + 12;
+        const y = (segment.fret - 1) * 20 + 5;
+        const barre = _node("rect", { x, y, width, height: 12, fill: 'black', rx: 6, ry: 6 });
+        const firstChild = this.$["strings"].firstChild;
+        if(firstChild){
+          this.$["strings"].insertBefore(barre, firstChild);
+        }else{
+          this.$["strings"].appendChild(barre);
         }
       });
 
@@ -192,6 +213,49 @@
       let len = parseInt(length)
       if(!len || len > maxFretCount) len = defaultFretCount;
       return len;
+    }
+
+    parseBarre(barre){
+      if(!barre || !barre.length) return [];
+
+      const segments = [];
+      let start = null;
+      let currentFret = null;
+
+      const flush = (endIndex) => {
+        if(start !== null){
+          const length = endIndex - start;
+          if(length >= 2 && currentFret){
+            segments.push({ start, end: endIndex - 1, fret: currentFret });
+          }
+        }
+        start = null;
+        currentFret = null;
+      };
+
+      barre.forEach((value, idx) => {
+        const barreFret = parseInt(value, 10);
+
+        if(!barreFret || barreFret < 1){
+          flush(idx);
+          return;
+        }
+
+        if(start === null){
+          start = idx;
+          currentFret = barreFret;
+          return;
+        }
+
+        if(barreFret !== currentFret){
+          flush(idx);
+          start = idx;
+          currentFret = barreFret;
+        }
+      });
+
+      flush(barre.length);
+      return segments;
     }
   }
 
