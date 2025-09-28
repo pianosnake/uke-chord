@@ -62,7 +62,7 @@
     Add a <code>&lt;uke-chord&gt;</code> element wherever you need a chord diagram in your web page. Then set the following parameters:
     <h3>frets</h3>
     <p>This attribute is <b>required</b>. Set the <code>frets</code> attribute to the numeric value of the frets that should be played, left to right. The number of frets determines
-      the width of the diagram. The limit is 10 strings. Pass an 'x' to indicate a string should not be played and '0' if it should remain open. Pass an '_' to indicate a string that should be ignored. Make sure to 
+      the width of the diagram. The limit is 10 strings. Pass an 'x' to indicate a string should not be played and '0' if it should remain open. Pass an '_' (underscore) to indicate a string that should be shown but neither marked open (0) nor unplayed (x). Make sure to 
     use <b>quotes</b> around this value.</p>
 
     <pre><code>&lt;uke-chord frets=&quot;2010&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;x32010&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;320&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;4xx30xx&quot;&gt;&lt;/uke-chord&gt;<br>&lt;uke-chord frets=&quot;22__&quot;&gt;&lt;/uke-chord&gt;</code></pre>
@@ -107,7 +107,7 @@
     <uke-chord frets="2313" fingers="3214" sub="__R_" position=0 ></uke-chord>
     <uke-chord frets="320003" fingers="210003" sub="EADGBE" position=0></uke-chord>
     <uke-chord frets="310" fingers="21" sub="D,A,A/D" position=0></uke-chord>
-    <uke-chord frets="4222" sub="R\n2,♭3,5,R"></uke-chord>
+    <uke-chord frets="4222" sub="R,♭3,5,R"></uke-chord>
 
     <h3>length</h3>
     <p>By default, there are only 4 frets shown. Set <code>length</code> to another number to show more or less frets.</p>
