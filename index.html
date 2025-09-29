@@ -26,7 +26,6 @@
     }
   </script>
   <style>
-    /* uke-chord::part(uke) { --uke-fill: green; --uke-stroke: blue; --uke-text: orange; } */
     uke-chord.styled {
       --uke-fill: #189957;
       --uke-fingertext: yellow;
@@ -47,8 +46,7 @@
 
   <section class="main-content">
     <p><code>&lt;uke-chord&gt;</code> is a custom HTML element for tab chord diagrams using SVG graphics. It is
-      tuning agnostic and can be used for any fretted string instrument including the mandolin, 3 string dulcimer, ukulele, guitar, and 7 string guitar.
-      </p>
+      tuning agnostic and can be used for any fretted string instrument including the ukulele, mandolin, guitar, 3 string dulcimer, etc ...</p>
 
     <h2>Install</h2>
     <p>Download this repo using the 'Download' button and load <b>uke-chord.js</b> (unminified version) or <b>uke-chord.min.js</b> (minified) into your page's HEAD tag. The <b>webcomponents-lite.min.js</b> file offers support for older browsers, so it is <b>optional</b>.
@@ -134,14 +132,14 @@
     <h3>colors</h3>
     <p>Customize the colors of the chord diagram by using CSS variables. The following variables are available:</p>
    <pre><code>uke-chord.styled {
-  --uke-fill: #189957;          /* fill color for the grid, bubbles, diamonds and barres */
-  --uke-fingertext: yellow;    /* text color for the finger numbers inside the bubbles */
-  --uke-text: red;             /* text color for the chord name, fret numbers, position number, and sub text */
+  --uke-fill: #189957;       /* grid, bubbles, diamonds and barres */
+  --uke-fingertext: yellow;  /* finger numbers inside bubbles */
+  --uke-text: red;           /* chord name, sub, position */
 }</code></pre>
     <uke-chord class="styled" frets="2310" fingers="231" position=0 name="F7"></uke-chord>
 
     <h3>img</h3>
-    <p>To allow styling with CSS, the SVG output is inlined by default. To get the SVG inside an image, set an <code>img</code> attribute. This allows right clicking on an image and saving it, or in some browsers, dragging the image from the browser.</p>
+    <p>To get the SVG inside an image, set an <code>img</code> attribute. This will allow right clicking on the diagram and saving it, or in some browsers, dragging the image from the browser.</p>
     <pre><code>&lt;uke-chord img frets=&quot;2310&quot; fingers=&quot;231&quot; position=0&gt;&lt;/uke-chord&gt;</code></pre>
     <uke-chord img frets="2310" fingers="231" position=0 img></uke-chord>
     
