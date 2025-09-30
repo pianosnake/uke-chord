@@ -26,10 +26,14 @@
     }
   </script>
   <style>
-    uke-chord.styled {
+    uke-chord.green {
       --uke-fill: #189957;
       --uke-fingertext: yellow;
       --uke-text: red;
+    }
+    uke-chord.purple {
+      --uke-fill: #800080;
+      --uke-text: #800080;
     }
   </style>
 </head>
@@ -130,18 +134,28 @@
     <uke-chord frets="5433" length=5 fingers="3211" position=0 name="C" r=14></uke-chord>
 
     <h3>colors</h3>
-    <p>Customize the colors of the chord diagram by using CSS variables. The following variables are available:</p>
-   <pre><code>uke-chord.styled {
+    <p>Customize the colors of the chord diagram by using CSS variables inside a &lt;style&gt; block. The following variables are available:</p>
+   <pre><code>&lt;style&gt;
+uke-chord.green {
   --uke-fill: #189957;       /* grid, bubbles, diamonds and barres */
   --uke-fingertext: yellow;  /* finger numbers inside bubbles */
   --uke-text: red;           /* chord name, sub, position */
-}</code></pre>
-    <uke-chord class="styled" frets="2310" fingers="231" position=0 name="F7"></uke-chord>
+}
+&lt;/style&gt;
+&lt;uke-chord class=&quot;green&quot; frets=&quot;231x&quot; fingers=&quot;231&quot; position=0 name=&quot;F7&quot;&gt;&lt;/uke-chord&gt;
+  </code></pre>
+    <uke-chord class="green" frets="231x" fingers="231" position=0 name="F7"></uke-chord>
 
     <h3>img</h3>
-    <p>To get the SVG inside an image, set an <code>img</code> attribute. This will allow right clicking on the diagram and saving it, or in some browsers, dragging the image from the browser.</p>
-    <pre><code>&lt;uke-chord img frets=&quot;2310&quot; fingers=&quot;231&quot; position=0&gt;&lt;/uke-chord&gt;</code></pre>
-    <uke-chord img frets="2310" fingers="231" position=0 img></uke-chord>
+    <p>To render the diagram as an image, set an <code>img</code> attribute. This will allow right clicking on the diagram and saving it, or in some browsers, dragging the image from the browser.</p>
+    <pre><code>&lt;style&gt;
+uke-chord.purple {
+  --uke-fill: #800080;
+  --uke-text: #800080;
+}
+&lt;/style&gt;
+&lt;uke-chord img class=&quot;purple&quot; name=&quot;E7#9&quot; frets=&quot;021230&quot; position=6 sub=&quot;R,R,7,3,#9,R&quot; fingers=&quot;02134&quot;&gt;&lt;/uke-chord&gt;</code></pre>
+    <uke-chord img class="purple" name="E7#9" frets="021230" position=6 sub="R,R,7,3,#9,R" fingers="02134"></uke-chord>
     
     <h2>In the wild</h2>
     <p>This component was originally built for <a href='https://www.pianosnake.com/2016/02/ukulele-dominant-7th-chords.html'>a series of posts on ukulele playing</a>.</p>
